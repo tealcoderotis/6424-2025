@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
-    public static FollowerConstants followerConstants = new FollowerConstants().mass(5);
+    public static FollowerConstants followerConstants = new FollowerConstants().mass(5); //TODO Replace mass with accurate value. Mass is in kilograms
 
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
@@ -29,6 +29,10 @@ public class Constants {
     public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
             .forwardEncoder_HardwareMapName("front_encoder")
             .strafeEncoder_HardwareMapName("rear_encoder")
+            .forwardPodY(-9)
+            .strafePodX(-9) //TODO Replace guessed offsets with accurate measurements
+            .forwardTicksToInches(0.002968433996)
+            .strafeTicksToInches(0.002968433996) //TODO Replace guessed inches per tick with accurate measurements not sure it if is in ticks per inch or inches per tick
             .IMU_HardwareMapName("imu")
             .IMU_Orientation(
                     new RevHubOrientationOnRobot(
