@@ -1,4 +1,5 @@
 ## FTC 6424 Team Code
+This repository contains the team code for the First Tech Challenge Team 6424's robot for the 2025 DECODE season
 
 ## NOTICE
 
