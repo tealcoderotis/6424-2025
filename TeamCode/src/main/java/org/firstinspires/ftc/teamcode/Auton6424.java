@@ -52,7 +52,7 @@ public class Auton6424 extends LinearOpMode {
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    follower.followPath(paths.Path2);
+                    //TODO Intake!
                     pathState = 3;
                 }
                 break;
