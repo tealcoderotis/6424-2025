@@ -16,28 +16,36 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Poses;
 @TeleOp
 public class TeleOpBlue6424 extends LinearOpMode {
     private Follower follower;
-    private DcMotor shooterRotate;
-    private DcMotor shooterShoot;
+    private DcMotor shooter;
+    private DcMotor intake;
     private Poses poses;
+    private boolean autonomousDrive;
 
     @Override
     public void runOpMode() {
         poses = new Poses();
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(new Pose(96.300, 95.600, Math.toRadians(45)));
-        shooterRotate = (DcMotor)hardwareMap.get("shooter1");
-        shooterShoot = (DcMotor)hardwareMap.get("shooter2");
+        follower.setStartingPose(poses.BlueShooter);
+        autonomousDrive = false;
+        intake = (DcMotor)hardwareMap.get("indexMotor");
+        shooter = (DcMotor)hardwareMap.get("shooterMotor");
         waitForStart();
         follower.startTeleopDrive();
         while (opModeIsActive()) {
             //drivebase
-            if (!follower.isBusy()) {
+            if (!follower.isBusy() && autonomousDrive) {
+                autonomousDrive = false;
+                follower.startTeleopDrive();
+            }
+            if (!autonomousDrive) {
                 follower.setTeleOpDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x, false);
             }
             else {
                 //cancel automated movement upon joystick movement
                 if (gamepad1.left_stick_y != 0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0 || gamepad1.right_stick_y != 0) {
                     follower.breakFollowing();
+                    autonomousDrive = false;
+                    follower.startTeleopDrive();
                     follower.setTeleOpDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x, false);
                 }
             }
@@ -45,34 +53,40 @@ public class TeleOpBlue6424 extends LinearOpMode {
                 //moves to parking positon
                 follower.breakFollowing();
                 follower.followPath(createPathToPose(poses.BluePark));
+                autonomousDrive = true;
             }
             if (gamepad1.yWasPressed()) {
                 //moves to lever
                 follower.breakFollowing();
                 follower.followPath(createPathToPose(poses.BlueLever));
+                autonomousDrive = true;
             }
             if (gamepad1.xWasPressed()) {
                 //moves to intake
                 follower.breakFollowing();
                 follower.followPath(createPathToPose(poses.BlueIntake));
+                autonomousDrive = true;
             }
             if (gamepad1.bWasPressed()) {
                 //moves to shooter
                 follower.breakFollowing();
                 follower.followPath(createPathToPose(poses.BlueShooter));
+                autonomousDrive = true;
             }
             follower.update();
-            //shooter rotation
-            shooterRotate.setPower(gamepad2.left_stick_x);
-            //shooter action
-            if (gamepad2.a) {
-                shooterShoot.setPower(1);
-            }
-            else if (gamepad2.b) {
-                shooterShoot.setPower(-1);
+            //intake
+            if (gamepad2.b) {
+                intake.setPower(1);
             }
             else {
-                shooterShoot.setPower(0);
+                intake.setPower(0);
+            }
+            //shooter
+            if (gamepad2.a) {
+                shooter.setPower(1);
+            }
+            else {
+                shooter.setPower(0);
             }
         }
     }

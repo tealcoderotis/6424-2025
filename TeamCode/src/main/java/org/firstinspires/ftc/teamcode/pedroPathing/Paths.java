@@ -6,17 +6,17 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 
 public class Paths {
-    public PathChain BlueRow1FirstBall;
-    public PathChain BlueRow1SecondBall;
-    public PathChain BlueRow1ThirdBall;
-    public PathChain BlueRow1ToShooter;
-    public PathChain BlueRow2FirstBall;
-    public PathChain BlueRow2SecondBall;
-    public PathChain BlueRow2ThirdBall;
-    public PathChain BlueRow2ToShooter;
+    public PathChain RedRow1FirstBall;
+    public PathChain RedRow1SecondBall;
+    public PathChain RedRow1ThirdBall;
+    public PathChain RedRow1ToShooter;
+    public PathChain RedRow2FirstBall;
+    public PathChain RedRow2SecondBall;
+    public PathChain RedRow2ThirdBall;
+    public PathChain RedRow2ToShooter;
 
     public Paths(Follower follower) {
-        BlueRow1FirstBall = follower
+        RedRow1FirstBall = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(96.300, 95.600), new Pose(115.000, 95.000))
@@ -24,7 +24,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(270))
                 .build();
 
-        BlueRow1SecondBall = follower
+        RedRow1SecondBall = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(115.000, 95.000), new Pose(120.000, 95.000))
@@ -32,7 +32,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(270))
                 .build();
 
-        BlueRow1ThirdBall = follower
+        RedRow1ThirdBall = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(120.000, 95.000), new Pose(125.200, 95.000))
@@ -40,7 +40,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(270))
                 .build();
 
-        BlueRow1ToShooter = follower
+        RedRow1ToShooter = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(125.200, 95.000), new Pose(96.300, 95.600))
@@ -48,7 +48,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(45))
                 .build();
 
-        BlueRow2FirstBall = follower
+        RedRow2FirstBall = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(96.300, 95.600), new Pose(115.000, 71.000))
@@ -56,7 +56,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(270))
                 .build();
 
-        BlueRow2SecondBall = follower
+        RedRow2SecondBall = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(115.000, 71.000), new Pose(120.000, 71.000))
@@ -64,7 +64,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(270))
                 .build();
 
-        BlueRow2ThirdBall = follower
+        RedRow2ThirdBall = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(120.000, 71.000), new Pose(125.200, 71.000))
@@ -72,7 +72,7 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(270))
                 .build();
 
-        BlueRow2ToShooter = follower
+        RedRow2ToShooter = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(125.200, 71.000), new Pose(96.300, 95.600))
