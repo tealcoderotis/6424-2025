@@ -35,7 +35,7 @@ public class TeleOp6424 extends LinearOpMode {
             }
             else {
                 //cancel automated movement upon joystick movement
-                if (gamepad1.left_stick_y != 0 || gamepad1.left_stick_x != 0) {
+                if (gamepad1.left_stick_y != 0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0 || gamepad1.right_stick_y != 0) {
                     follower.breakFollowing();
                     follower.setTeleOpDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x, false);
                 }
@@ -43,7 +43,7 @@ public class TeleOp6424 extends LinearOpMode {
             if (gamepad1.aWasPressed()) {
                 //moves to parking positon
                 follower.breakFollowing();
-                follower.followPath(createPathToPose(new Pose(105.3, 33.2, Math.toRadians(0))));
+                follower.followPath(createPathToPose());
             }
             if (gamepad1.yWasPressed()) {
                 //moves to lever
