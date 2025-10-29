@@ -4,24 +4,25 @@ import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
-import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
-import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.pedroPathing.Poses;
 
 @Configurable
 @TeleOp
-public class TeleOp6424 extends LinearOpMode {
+public class TeleOpBlue6424 extends LinearOpMode {
     private Follower follower;
     private DcMotor shooterRotate;
     private DcMotor shooterShoot;
+    private Poses poses;
 
     @Override
     public void runOpMode() {
+        poses = new Poses();
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(new Pose(96.300, 95.600, Math.toRadians(45)));
         shooterRotate = (DcMotor)hardwareMap.get("shooter1");
@@ -43,22 +44,22 @@ public class TeleOp6424 extends LinearOpMode {
             if (gamepad1.aWasPressed()) {
                 //moves to parking positon
                 follower.breakFollowing();
-                follower.followPath(createPathToPose());
+                follower.followPath(createPathToPose(poses.BluePark));
             }
             if (gamepad1.yWasPressed()) {
                 //moves to lever
                 follower.breakFollowing();
-                follower.followPath(createPathToPose(new Pose(16.4, 70.5, Math.toRadians(0))));
+                follower.followPath(createPathToPose(poses.BlueLever));
             }
             if (gamepad1.xWasPressed()) {
                 //moves to intake
                 follower.breakFollowing();
-                follower.followPath(createPathToPose(new Pose(117.9, 11.7, Math.toRadians(0))));
+                follower.followPath(createPathToPose(poses.BlueIntake));
             }
             if (gamepad1.bWasPressed()) {
                 //moves to shooter
                 follower.breakFollowing();
-                follower.followPath(createPathToPose(new Pose(96.300, 95.600, Math.toRadians(45))));
+                follower.followPath(createPathToPose(poses.BlueShooter));
             }
             follower.update();
             //shooter rotation
