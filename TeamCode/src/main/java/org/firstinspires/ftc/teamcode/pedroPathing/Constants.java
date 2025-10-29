@@ -17,18 +17,18 @@ public class Constants {
 
     public static MecanumConstants driveConstants = new MecanumConstants()
             .maxPower(1)
-            .rightFrontMotorName("motor_front_right")
-            .rightRearMotorName("motor_back_right")
-            .leftRearMotorName("motor_back_left")
-            .leftFrontMotorName("motor_front_left")
+            .rightFrontMotorName("frontRight")
+            .rightRearMotorName("backRight")
+            .leftRearMotorName("frontLeft")
+            .leftFrontMotorName("backLeft")
             .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
             .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
             .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
             .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD);
 
     public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
-            .forwardEncoder_HardwareMapName("motor_back_left")
-            .strafeEncoder_HardwareMapName("motor_back_right")
+            .forwardEncoder_HardwareMapName("forwardOdometry")
+            .strafeEncoder_HardwareMapName("strafeOdometry")
             .forwardPodY(-9)
             .strafePodX(-9) //TODO Replace guessed offsets with accurate measurements
             .forwardTicksToInches(0.002968433996)
