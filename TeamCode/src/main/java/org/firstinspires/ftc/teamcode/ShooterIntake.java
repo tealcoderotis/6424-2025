@@ -12,9 +12,10 @@ public class ShooterIntake {
     private boolean isShooterBusy;
     private boolean isIntakeBusy;
     private static final int SHOOTING_TIME = 1000;
-    private static final int INTAKE_TIME = 1000;
-    private int shootingTime = SHOOTING_TIME;
-    private int intakeTime = INTAKE_TIME;
+    private static final int INTAKE_TIME = 500;
+    private static final int INDEX_TIME = 500;
+    private int ballsToShoot = 0;
+    private int currentBall = 0;
     public ShooterIntake(HardwareMap hardwareMap) {
         shootTimer = new Timer();
         intakeTimer = new Timer();
@@ -24,37 +25,41 @@ public class ShooterIntake {
         shooter = (DcMotor)hardwareMap.get("shooterMotor");
     }
 
-    public void beginShooting(int time) {
-        shootingTime = time;
+    public void beginShooting(int ballsToShoot) {
+        this.ballsToShoot = ballsToShoot;
+        currentBall = 0;
         shootTimer.resetTimer();
-        shooter.setPower(1);
+        shooter.setPower(0.5);
+        intake.setPower(0.4);
         isShooterBusy = true;
     }
 
-    public void beginShooting()  {
-        beginShooting(SHOOTING_TIME);
-    }
-
-    public void beginIntake(int time) {
-        intakeTime = time;
-        intakeTimer.resetTimer();
-        intake.setPower(1);
-        isIntakeBusy = true;
-    }
-
     public void beginIntake() {
-        beginIntake(INTAKE_TIME);
+        intakeTimer.resetTimer();
+        intake.setPower(0.5);
+        isIntakeBusy = true;
     }
 
     public void update() {
         if (isShooterBusy) {
-            if (shootTimer.getElapsedTime() >= shootingTime) {
-                shooter.setPower(0);
-                isShooterBusy = false;
+            if (shootTimer.getElapsedTime() >= INDEX_TIME) {
+                intake.setPower(0);
+            }
+            if (shootTimer.getElapsedTime() >= SHOOTING_TIME) {
+                currentBall ++;
+                if (currentBall < ballsToShoot) {
+                    intake.setPower(0.4);
+                    shootTimer.resetTimer();
+                }
+                else {
+                    shooter.setPower(0);
+                    intake.setPower(0);
+                    isShooterBusy = false;
+                }
             }
         }
         if (isIntakeBusy) {
-            if (intakeTimer.getElapsedTime() >= intakeTime) {
+            if (intakeTimer.getElapsedTime() >= INTAKE_TIME) {
                 intake.setPower(0);
                 isIntakeBusy = false;
             }

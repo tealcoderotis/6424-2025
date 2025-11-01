@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Paths;
 
 @Configurable
 @Autonomous
-public class AutonRed6424 extends LinearOpMode {
+public class AutonBlue6424 extends LinearOpMode {
     private Follower follower;
     private ShooterIntake shooterIntake;
     private int pathState;
@@ -21,7 +21,7 @@ public class AutonRed6424 extends LinearOpMode {
     public void runOpMode() {
         shooterIntake = new ShooterIntake(hardwareMap);
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(new Pose(83.39221704720353, 132.93753206455213, Math.toRadians(0)));
+        follower.setStartingPose(new Pose(61.05120322231873, 132.93753206455213, Math.toRadians(180)));
         paths = new Paths(follower);
         pathState = 0;
         waitForStart();
@@ -45,7 +45,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 1:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1FirstBall);
+                    follower.followPath(paths.BlueRow1FirstBall);
                     pathState = 2;
                 }
                 break;
@@ -57,7 +57,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 3:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1SecondBall);
+                    follower.followPath(paths.BlueRow1SecondBall);
                     pathState = 4;
                 }
                 break;
@@ -69,7 +69,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 5:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1ThirdBall);
+                    follower.followPath(paths.BlueRow1ThirdBall);
                     pathState = 6;
                 }
                 break;
@@ -81,7 +81,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 7:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1ToShooter);
+                    follower.followPath(paths.BlueRow1ToShooter);
                     pathState = 8;
                 }
                 break;
@@ -93,7 +93,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 9:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2FirstBall);
+                    follower.followPath(paths.BlueRow2FirstBall);
                     pathState = 10;
                 }
                 break;
@@ -105,7 +105,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 11:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2SecondBall);
+                    follower.followPath(paths.BlueRow2SecondBall);
                     pathState = 12;
                 }
                 break;
@@ -117,7 +117,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 13:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2ThirdBall);
+                    follower.followPath(paths.BlueRow2ThirdBall);
                     pathState = 14;
                 }
                 break;
@@ -129,7 +129,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 15:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2ToShooter);
+                    follower.followPath(paths.BlueRow2ToShooter);
                     pathState = 16;
                 }
                 break;

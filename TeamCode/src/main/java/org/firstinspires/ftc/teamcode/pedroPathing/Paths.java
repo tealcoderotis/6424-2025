@@ -27,9 +27,9 @@ public class Paths {
         RedRow1FirstBall = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(96.300, 95.600), new Pose(115.000, 95.000))
+                        new BezierLine(new Pose(83.39221704720353, 132.93753206455213), new Pose(115.000, 95.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(270))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(270))
                 .build();
 
         RedRow1SecondBall = follower
@@ -51,17 +51,17 @@ public class Paths {
         RedRow1ToShooter = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(125.200, 95.000), new Pose(96.300, 95.600))
+                        new BezierLine(new Pose(125.200, 95.000), new Pose(83.39221704720353, 132.93753206455213))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(45))
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(0))
                 .build();
 
         RedRow2FirstBall = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(96.300, 95.600), new Pose(115.000, 71.000))
+                        new BezierLine(new Pose(83.39221704720353, 132.93753206455213), new Pose(115.000, 71.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(270))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(270))
                 .build();
 
         RedRow2SecondBall = follower
@@ -83,17 +83,17 @@ public class Paths {
         RedRow2ToShooter = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(125.200, 71.000), new Pose(96.300, 95.600))
+                        new BezierLine(new Pose(125.200, 71.000), new Pose(83.39221704720353, 132.93753206455213))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(45))
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(0))
                 .build();
 
         BlueRow1FirstBall = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(48.000, 95.600), new Pose(29.400, 95.000))
+                        new BezierLine(new Pose(61.05120322231873, 132.93753206455213), new Pose(29.400, 95.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(270))
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(270))
                 .build();
 
         BlueRow1SecondBall = follower
@@ -115,17 +115,17 @@ public class Paths {
         BlueRow1ToShooter = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(19.100, 95.000), new Pose(48.000, 95.600))
+                        new BezierLine(new Pose(19.100, 95.000), new Pose(61.05120322231873, 132.93753206455213))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(135))
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(180))
                 .build();
 
         BlueRow2FirstBall = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(48.000, 95.600), new Pose(29.400, 71.000))
+                        new BezierLine(new Pose(61.05120322231873, 132.93753206455213), new Pose(29.400, 71.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(270))
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(270))
                 .build();
 
         BlueRow2SecondBall = follower
@@ -147,9 +147,9 @@ public class Paths {
         BlueRow2ToShooter = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(19.100, 71.000), new Pose(48.000, 95.600))
+                        new BezierLine(new Pose(19.100, 71.000), new Pose(61.05120322231873, 132.93753206455213))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(135))
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(180))
                 .build();
     }
 }
