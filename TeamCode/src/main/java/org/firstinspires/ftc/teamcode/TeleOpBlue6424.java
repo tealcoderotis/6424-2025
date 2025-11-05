@@ -71,6 +71,7 @@ public class TeleOpBlue6424 extends LinearOpMode {
                 //moves to shooter
                 follower.breakFollowing();
                 follower.followPath(createPathToPose(poses.BlueShooter));
+                telemetry.addLine("b was pressed");
                 autonomousDrive = true;
             }
             follower.update();
@@ -88,6 +89,10 @@ public class TeleOpBlue6424 extends LinearOpMode {
             else {
                 shooter.setPower(0);
             }
+            telemetry.addData("x", follower.getPose().getX());
+            telemetry.addData("y", follower.getPose().getY());
+            telemetry.addData("heading", follower.getPose().getHeading());
+            telemetry.update();
         }
     }
 
