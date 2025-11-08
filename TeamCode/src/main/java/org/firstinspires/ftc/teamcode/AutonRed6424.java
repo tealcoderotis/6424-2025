@@ -5,6 +5,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.pedroPathing.Paths;
@@ -24,6 +25,10 @@ public class AutonRed6424 extends LinearOpMode {
         follower.setStartingPose(new Pose(83.39221704720353, 132.93753206455213, Math.toRadians(0)));
         paths = new Paths(follower);
         pathState = 0;
+        DcMotor rightFrontDrive = (DcMotor)hardwareMap.get("rightFrontDrive");
+        DcMotor rightBackDrive = (DcMotor)hardwareMap.get("rightBackDrive");
+        DcMotor leftFrontDrive = (DcMotor)hardwareMap.get("leftFrontDrive");
+        DcMotor leftBackDrive = (DcMotor)hardwareMap.get("leftBackDrive");
         waitForStart();
         while (opModeIsActive()) {
             shooterIntake.update();
@@ -33,6 +38,10 @@ public class AutonRed6424 extends LinearOpMode {
             telemetry.addData("x", follower.getPose().getX());
             telemetry.addData("y", follower.getPose().getY());
             telemetry.addData("heading", follower.getPose().getHeading());
+            telemetry.addData("leftFrontDrive", leftFrontDrive.getPower());
+            telemetry.addData("leftBackDrive", leftBackDrive.getPower());
+            telemetry.addData("rightFrontDrive", rightFrontDrive.getPower());
+            telemetry.addData("rightBackDrive", rightBackDrive.getPower());
             telemetry.update();
         }
     }
@@ -51,7 +60,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntake();
+                    //TODO Add intake
                     pathState = 3;
                 }
                 break;
@@ -63,7 +72,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntake();
+                    //TODO Add intake
                     pathState = 5;
                 }
                 break;
@@ -75,7 +84,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntake();
+                    //TODO Add intake
                     pathState = 7;
                 }
                 break;
@@ -99,7 +108,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 10:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntake();
+                    //TODO Add intake
                     pathState = 11;
                 }
                 break;
@@ -111,7 +120,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 12:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntake();
+                    //TODO Add intake
                     pathState = 13;
                 }
                 break;
@@ -123,7 +132,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 14:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntake();
+                    //TODO Add intake
                     pathState = 15;
                 }
                 break;

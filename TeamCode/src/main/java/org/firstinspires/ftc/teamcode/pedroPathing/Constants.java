@@ -4,6 +4,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
 import com.pedropathing.ftc.drivetrains.MecanumConstants;
+import com.pedropathing.ftc.localization.Encoder;
 import com.pedropathing.ftc.localization.constants.PinpointConstants;
 import com.pedropathing.ftc.localization.constants.TwoWheelConstants;
 import com.pedropathing.paths.PathConstraints;
@@ -23,8 +24,8 @@ public class Constants {
             .maxPower(1)
             .rightFrontMotorName("rightFrontDrive")
             .rightRearMotorName("rightBackDrive")
-            .leftRearMotorName("leftFrontDrive")
-            .leftFrontMotorName("leftBackDrive")
+            .leftRearMotorName("leftBackDrive")
+            .leftFrontMotorName("leftFrontDrive")
             .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
             .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
             .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
@@ -37,6 +38,8 @@ public class Constants {
             .strafePodX(8) //TODO Replace guessed offsets with accurate measurements
             .forwardTicksToInches(0.002968434003)
             .strafeTicksToInches(0.002968434003) //TODO Replace guessed inches per tick with accurate measurements not sure it if is in ticks per inch or inches per tick
+            .forwardEncoderDirection(Encoder.FORWARD)
+            .strafeEncoderDirection(Encoder.FORWARD)
             .IMU_HardwareMapName("imu")
             .IMU_Orientation(
                     new RevHubOrientationOnRobot(
@@ -47,9 +50,9 @@ public class Constants {
 
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
+                .twoWheelLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
                 .mecanumDrivetrain(driveConstants)
-                .twoWheelLocalizer(localizerConstants)
                 .build();
     }
 }

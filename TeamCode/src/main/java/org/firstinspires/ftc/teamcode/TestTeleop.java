@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Poses;
 
 @Configurable
 @TeleOp
-public class TeleOpBlue6424 extends LinearOpMode {
+public class TestTeleop extends LinearOpMode {
     private Follower follower;
     private DcMotor shooter;
     private DcMotor intake;
@@ -29,6 +29,10 @@ public class TeleOpBlue6424 extends LinearOpMode {
         autonomousDrive = false;
         intake = (DcMotor)hardwareMap.get("indexMotor");
         shooter = (DcMotor)hardwareMap.get("shooterMotor");
+        DcMotor rightFrontDrive = (DcMotor)hardwareMap.get("rightFrontDrive");
+        DcMotor rightBackDrive = (DcMotor)hardwareMap.get("rightBackDrive");
+        DcMotor leftFrontDrive = (DcMotor)hardwareMap.get("leftFrontDrive");
+        DcMotor leftBackDrive = (DcMotor)hardwareMap.get("leftBackDrive");
         waitForStart();
         follower.startTeleopDrive();
         while (opModeIsActive()) {
@@ -92,6 +96,10 @@ public class TeleOpBlue6424 extends LinearOpMode {
             telemetry.addData("x", follower.getPose().getX());
             telemetry.addData("y", follower.getPose().getY());
             telemetry.addData("heading", follower.getPose().getHeading());
+            telemetry.addData("leftFrontDrive", leftFrontDrive.getPower());
+            telemetry.addData("leftBackDrive", leftBackDrive.getPower());
+            telemetry.addData("rightFrontDrive", rightFrontDrive.getPower());
+            telemetry.addData("rightBackDrive", rightBackDrive.getPower());
             telemetry.update();
         }
     }
