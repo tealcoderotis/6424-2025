@@ -100,6 +100,8 @@ public class TestTeleop extends LinearOpMode {
             telemetry.addData("leftBackDrive", leftBackDrive.getPower());
             telemetry.addData("rightFrontDrive", rightFrontDrive.getPower());
             telemetry.addData("rightBackDrive", rightBackDrive.getPower());
+            telemetry.addData("Indexer Encoder Position", intake.getCurrentPosition());
+            telemetry.addData("Shooter Encoder Position", shooter.getCurrentPosition());
             telemetry.update();
         }
     }

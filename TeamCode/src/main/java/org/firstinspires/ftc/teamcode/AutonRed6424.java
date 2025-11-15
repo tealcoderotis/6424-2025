@@ -20,7 +20,7 @@ public class AutonRed6424 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        shooterIntake = new ShooterIntake(hardwareMap);
+        shooterIntake = new ShooterIntake(hardwareMap, telemetry);
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(new Pose(83.39221704720353, 132.93753206455213, Math.toRadians(0)));
         paths = new Paths(follower);
@@ -60,7 +60,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    //TODO Add intake
+                    shooterIntake.beginIntaking();
                     pathState = 3;
                 }
                 break;
@@ -72,7 +72,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    //TODO Add intake
+                    shooterIntake.beginIntaking();
                     pathState = 5;
                 }
                 break;
@@ -84,7 +84,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    //TODO Add intake
+                    shooterIntake.beginIntaking();
                     pathState = 7;
                 }
                 break;
@@ -108,7 +108,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 10:
                 if (!follower.isBusy()) {
-                    //TODO Add intake
+                    shooterIntake.beginIntaking();
                     pathState = 11;
                 }
                 break;
@@ -120,7 +120,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 12:
                 if (!follower.isBusy()) {
-                    //TODO Add intake
+                    shooterIntake.beginIntaking();
                     pathState = 13;
                 }
                 break;
@@ -132,7 +132,7 @@ public class AutonRed6424 extends LinearOpMode {
                 break;
             case 14:
                 if (!follower.isBusy()) {
-                    //TODO Add intake
+                    shooterIntake.beginIntaking();
                     pathState = 15;
                 }
                 break;
