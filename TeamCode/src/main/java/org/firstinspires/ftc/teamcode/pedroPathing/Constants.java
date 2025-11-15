@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+//PedroPathing Constants
 public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants().mass(10); //TODO Replace mass with accurate value. Mass is in kilograms
 
@@ -34,10 +35,10 @@ public class Constants {
     public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
             .forwardEncoder_HardwareMapName("leftFrontDrive")
             .strafeEncoder_HardwareMapName("leftBackDrive")
-            .forwardPodY(-5)
-            .strafePodX(8) //TODO Replace guessed offsets with accurate measurements
+            .forwardPodY(-5.875)
+            .strafePodX(7.375)
             .forwardTicksToInches(0.002968434003)
-            .strafeTicksToInches(0.002968434003) //TODO Replace guessed inches per tick with accurate measurements not sure it if is in ticks per inch or inches per tick
+            .strafeTicksToInches(0.002968434003) //TODO Replace guessed inches per tick with accurate measurements though math feels very solid
             .forwardEncoderDirection(Encoder.FORWARD)
             .strafeEncoderDirection(Encoder.FORWARD)
             .IMU_HardwareMapName("imu")

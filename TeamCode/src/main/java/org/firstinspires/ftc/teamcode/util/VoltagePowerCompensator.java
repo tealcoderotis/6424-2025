@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.util;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+//Compenstates the shooter motor power based on the voltage
 public class VoltagePowerCompensator {
     private VoltageSensor voltageSensor;
     public VoltagePowerCompensator(HardwareMap hardwareMap) {

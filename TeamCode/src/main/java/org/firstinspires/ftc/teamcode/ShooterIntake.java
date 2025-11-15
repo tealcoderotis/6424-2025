@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.VoltagePowerCompensator;
 
+
+//handle our intake and shooter
 public class ShooterIntake {
     private DcMotor indexer;
     private DcMotor shooter;
@@ -42,6 +44,7 @@ public class ShooterIntake {
         this.telemetry = telemetry;
     }
 
+    //only called once when we start shooting
     public void beginShooting(int ballsToShoot) {
         isIntaking = false;
         this.ballsToShoot = ballsToShoot;
@@ -52,6 +55,7 @@ public class ShooterIntake {
         isReving = true;
     }
 
+    //only called once when we start intaking
     public void beginIntaking() {
         isIntaking = true;
         shootTimer.resetTimer();
@@ -59,6 +63,7 @@ public class ShooterIntake {
         isShooterBusy = true;
     }
 
+    //called every loop; checks the elapsed time and moves on to the next ball or stops shooting accordingly
     public void update() {
         if (isShooterBusy) {
             if (isIntaking) {
@@ -100,12 +105,14 @@ public class ShooterIntake {
         }
     }
 
+    //stops the shooter
     public void stop() {
         shooter.setPower(0);
         indexer.setPower(0);
         isShooterBusy = false;
     }
 
+    //called every loop while the shooter/intake is active; returns true if it is currently shooting or intaking
     public boolean isBusy() {
         return isShooterBusy;
     }

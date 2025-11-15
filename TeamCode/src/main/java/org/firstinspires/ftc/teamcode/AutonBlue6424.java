@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.pedroPathing.Paths;
 
+//Auton for the blue alliance
 @Configurable
 @Autonomous
 public class AutonBlue6424 extends LinearOpMode {
@@ -20,6 +21,7 @@ public class AutonBlue6424 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        //initialization
         shooterIntake = new ShooterIntake(hardwareMap, telemetry);
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(new Pose(61.05120322231873, 132.93753206455213, Math.toRadians(180)));
@@ -31,6 +33,7 @@ public class AutonBlue6424 extends LinearOpMode {
         DcMotor leftBackDrive = (DcMotor)hardwareMap.get("leftBackDrive");
         waitForStart();
         while (opModeIsActive()) {
+            //update shooter and follower
             shooterIntake.update();
             follower.update();
             autonomousPathUpdate();
@@ -46,6 +49,7 @@ public class AutonBlue6424 extends LinearOpMode {
         }
     }
 
+    //checks our current action and if the follower or shooter/intake are currently active, if not we increment at state counter, moving on to the next action
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:

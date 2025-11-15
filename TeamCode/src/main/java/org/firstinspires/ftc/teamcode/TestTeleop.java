@@ -106,6 +106,7 @@ public class TestTeleop extends LinearOpMode {
         }
     }
 
+    //derives a path starting at our current pose
     private PathChain createPathToPose(Pose pose) {
         return follower
                 .pathBuilder()

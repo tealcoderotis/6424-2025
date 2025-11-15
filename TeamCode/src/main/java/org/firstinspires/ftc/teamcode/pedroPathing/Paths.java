@@ -5,7 +5,9 @@ import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 
+//PedroPathing Paths
 public class Paths {
+    //declare all of our paths
     public PathChain RedRow1FirstBall;
     public PathChain RedRow1SecondBall;
     public PathChain RedRow1ThirdBall;
@@ -23,6 +25,7 @@ public class Paths {
     public PathChain BlueRow2ThirdBall;
     public PathChain BlueRow2ToShooter;
 
+    //initalize all of our paths
     public Paths(Follower follower) {
         RedRow1FirstBall = follower
                 .pathBuilder()

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 
 import com.pedropathing.geometry.Pose;
 
+//PedroPathing poses; only used in the test teleop
 public class Poses {
     public Pose BluePark;
     public Pose BlueLever;
