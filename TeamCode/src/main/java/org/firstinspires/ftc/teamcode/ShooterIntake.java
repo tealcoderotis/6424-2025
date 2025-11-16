@@ -16,6 +16,7 @@ public class ShooterIntake {
     private boolean isShooterBusy = false;
     private boolean isReving = false;
     private boolean isIntaking = false;
+    private boolean isIntakeContinuous = false;
     private static final int SHOOTING_TIME = 1000;
     private static final int INDEX_TIME = 500;
     private static final int INTAKE_TIME = 500;
@@ -56,7 +57,8 @@ public class ShooterIntake {
     }
 
     //only called once when we start intaking
-    public void beginIntaking() {
+    public void beginIntaking(boolean continuous) {
+        isIntakeContinuous = continuous;
         isIntaking = true;
         shootTimer.resetTimer();
         indexer.setPower(voltageCompensator.compensate(0.4));
@@ -67,9 +69,11 @@ public class ShooterIntake {
     public void update() {
         if (isShooterBusy) {
             if (isIntaking) {
-                if (shootTimer.getElapsedTime() >= INTAKE_TIME) {
-                    indexer.setPower(0);
-                    isShooterBusy = false;
+                if (!isIntakeContinuous) {
+                    if (shootTimer.getElapsedTime() >= INTAKE_TIME) {
+                        indexer.setPower(0);
+                        isShooterBusy = false;
+                    }
                 }
             }
             else {

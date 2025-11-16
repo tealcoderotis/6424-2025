@@ -86,46 +86,49 @@ public class OdometryAuton extends LinearOpMode {
                 break;
             case 1:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1FirstBall);
+                    follower.followPath(paths.RedRow1IntakeBegin);
                     pathState = 2;
                 }
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
+                    shooterIntake.beginIntaking(true);
+                    follower.followPath(paths.RedRow1IntakeEnd);
                     pathState = 3;
                 }
                 break;
             case 3:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1SecondBall);
+                if (!follower.isBusy()) {
+                    shooterIntake.stop();
+                    follower.followPath(paths.RedRow1ToShooter);
                     pathState = 4;
                 }
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
+                    shooterIntake.beginShooting(3);
                     pathState = 5;
                 }
                 break;
             case 5:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1ThirdBall);
+                    follower.followPath(paths.RedRow2IntakeBegin);
                     pathState = 6;
                 }
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
+                    shooterIntake.beginIntaking(true);
+                    follower.followPath(paths.RedRow2IntakeEnd);
                     pathState = 7;
                 }
                 break;
             case 7:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow1ToShooter);
+                if (!follower.isBusy()) {
+                    shooterIntake.stop();
+                    follower.followPath(paths.RedRow2ToShooter);
                     pathState = 8;
                 }
-                break;
             case 8:
                 if (!follower.isBusy()) {
                     shooterIntake.beginShooting(3);
@@ -134,51 +137,9 @@ public class OdometryAuton extends LinearOpMode {
                 break;
             case 9:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2FirstBall);
                     pathState = 10;
                 }
                 break;
-            case 10:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
-                    pathState = 11;
-                }
-                break;
-            case 11:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2SecondBall);
-                    pathState = 12;
-                }
-                break;
-            case 12:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
-                    pathState = 13;
-                }
-                break;
-            case 13:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2ThirdBall);
-                    pathState = 14;
-                }
-                break;
-            case 14:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
-                    pathState = 15;
-                }
-                break;
-            case 15:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.RedRow2ToShooter);
-                    pathState = 16;
-                }
-                break;
-            case 16:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginShooting(3);
-                    pathState = 17;
-                }
         }
     }
 
@@ -192,46 +153,49 @@ public class OdometryAuton extends LinearOpMode {
                 break;
             case 1:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow1FirstBall);
+                    follower.followPath(paths.BlueRow1IntakeBegin);
                     pathState = 2;
                 }
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
+                    shooterIntake.beginIntaking(true);
+                    follower.followPath(paths.BlueRow1IntakeEnd);
                     pathState = 3;
                 }
                 break;
             case 3:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow1SecondBall);
+                if (!follower.isBusy()) {
+                    shooterIntake.stop();
+                    follower.followPath(paths.BlueRow1ToShooter);
                     pathState = 4;
                 }
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
+                    shooterIntake.beginShooting(3);
                     pathState = 5;
                 }
                 break;
             case 5:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow1ThirdBall);
+                    follower.followPath(paths.BlueRow2IntakeBegin);
                     pathState = 6;
                 }
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
+                    shooterIntake.beginIntaking(true);
+                    follower.followPath(paths.BlueRow2IntakeEnd);
                     pathState = 7;
                 }
                 break;
             case 7:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow1ToShooter);
+                if (!follower.isBusy()) {
+                    shooterIntake.stop();
+                    follower.followPath(paths.BlueRow2ToShooter);
                     pathState = 8;
                 }
-                break;
             case 8:
                 if (!follower.isBusy()) {
                     shooterIntake.beginShooting(3);
@@ -240,51 +204,9 @@ public class OdometryAuton extends LinearOpMode {
                 break;
             case 9:
                 if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow2FirstBall);
                     pathState = 10;
                 }
                 break;
-            case 10:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
-                    pathState = 11;
-                }
-                break;
-            case 11:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow2SecondBall);
-                    pathState = 12;
-                }
-                break;
-            case 12:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
-                    pathState = 13;
-                }
-                break;
-            case 13:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow2ThirdBall);
-                    pathState = 14;
-                }
-                break;
-            case 14:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking();
-                    pathState = 15;
-                }
-                break;
-            case 15:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow2ToShooter);
-                    pathState = 16;
-                }
-                break;
-            case 16:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginShooting(3);
-                    pathState = 17;
-                }
         }
     }
 }
