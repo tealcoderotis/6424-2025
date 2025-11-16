@@ -50,6 +50,17 @@ public class ShooterIntake {
         isIntaking = false;
         this.ballsToShoot = ballsToShoot;
         currentBall = 0;
+        if (!isReving) {
+            shootTimer.resetTimer();
+            shooter.setPower(voltageCompensator.compensate(0.63));
+            isReving = true;
+        }
+        isShooterBusy = true;
+    }
+
+    public void beginReving() {
+        currentBall = -1;
+        isIntaking = false;
         shootTimer.resetTimer();
         shooter.setPower(voltageCompensator.compensate(0.63));
         isShooterBusy = true;
@@ -78,7 +89,7 @@ public class ShooterIntake {
             }
             else {
                 if (isReving) {
-                    if (shootTimer.getElapsedTime() >= REV_TIME) {
+                    if (shootTimer.getElapsedTime() >= REV_TIME && currentBall != -1) {
                         isReving = false;
                         indexer.setPower(voltageCompensator.compensate(0.4));
                         shootTimer.resetTimer();
@@ -95,9 +106,7 @@ public class ShooterIntake {
                             shootTimer.resetTimer();
                         }
                         else {
-                            shooter.setPower(0);
-                            indexer.setPower(0);
-                            isShooterBusy = false;
+                            stop();
                         }
                     }
                 }
@@ -114,6 +123,7 @@ public class ShooterIntake {
         shooter.setPower(0);
         indexer.setPower(0);
         isShooterBusy = false;
+        currentBall = -1;
     }
 
     //called every loop while the shooter/intake is active; returns true if it is currently shooting or intaking

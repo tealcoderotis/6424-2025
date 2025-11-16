@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.pedroPathing.Paths;
 
-//Auton for the red alliance
 @Configurable
 @Autonomous
 public class OdometryAuton extends LinearOpMode {
@@ -19,7 +18,7 @@ public class OdometryAuton extends LinearOpMode {
     private int pathState;
     private Paths paths;
     //-1 unknown; 0 red; 1 blue
-    private int alliance = -1;
+    private int alliance;
 
     @Override
     public void runOpMode() {
@@ -28,6 +27,7 @@ public class OdometryAuton extends LinearOpMode {
         follower = Constants.createFollower(hardwareMap);
         paths = new Paths(follower);
         pathState = 0;
+        alliance = -1;
         DcMotor rightFrontDrive = (DcMotor)hardwareMap.get("rightFrontDrive");
         DcMotor rightBackDrive = (DcMotor)hardwareMap.get("rightBackDrive");
         DcMotor leftFrontDrive = (DcMotor)hardwareMap.get("leftFrontDrive");
@@ -100,6 +100,7 @@ public class OdometryAuton extends LinearOpMode {
             case 3:
                 if (!follower.isBusy()) {
                     shooterIntake.stop();
+                    shooterIntake.beginReving();
                     follower.followPath(paths.RedRow1ToShooter);
                     pathState = 4;
                 }
@@ -126,6 +127,7 @@ public class OdometryAuton extends LinearOpMode {
             case 7:
                 if (!follower.isBusy()) {
                     shooterIntake.stop();
+                    shooterIntake.beginReving();
                     follower.followPath(paths.RedRow2ToShooter);
                     pathState = 8;
                 }
@@ -167,6 +169,7 @@ public class OdometryAuton extends LinearOpMode {
             case 3:
                 if (!follower.isBusy()) {
                     shooterIntake.stop();
+                    shooterIntake.beginReving();
                     follower.followPath(paths.BlueRow1ToShooter);
                     pathState = 4;
                 }
@@ -193,6 +196,7 @@ public class OdometryAuton extends LinearOpMode {
             case 7:
                 if (!follower.isBusy()) {
                     shooterIntake.stop();
+                    shooterIntake.beginReving();
                     follower.followPath(paths.BlueRow2ToShooter);
                     pathState = 8;
                 }
