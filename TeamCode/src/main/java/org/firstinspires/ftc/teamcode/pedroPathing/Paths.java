@@ -14,12 +14,14 @@ public class Paths {
     public PathChain RedRow2IntakeBegin;
     public PathChain RedRow2IntakeEnd;
     public PathChain RedRow2ToShooter;
+    public PathChain RedLeave;
     public PathChain BlueRow1IntakeBegin;
     public PathChain BlueRow1IntakeEnd;
     public PathChain BlueRow1ToShooter;
     public PathChain BlueRow2IntakeBegin;
     public PathChain BlueRow2IntakeEnd;
     public PathChain BlueRow2ToShooter;
+    public PathChain BlueLeave;
 
     //initalize all of our paths
     public Paths(Follower follower) {
@@ -71,6 +73,14 @@ public class Paths {
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
 
+        RedLeave = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(83.392, 132.938), new Pose(103.108, 59.579))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
         BlueRow1IntakeBegin = follower
                 .pathBuilder()
                 .addPath(
@@ -115,6 +125,14 @@ public class Paths {
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(19.100, 59.798), new Pose(61.051, 132.133))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
+                .build();
+
+        BlueLeave = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(61.051, 132.133), new Pose(40.892, 59.798))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
                 .build();

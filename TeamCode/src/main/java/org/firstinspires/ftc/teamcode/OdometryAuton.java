@@ -139,7 +139,13 @@ public class OdometryAuton extends LinearOpMode {
                 break;
             case 9:
                 if (!shooterIntake.isBusy()) {
+                    follower.followPath(paths.RedLeave);
                     pathState = 10;
+                }
+                break;
+            case 10:
+                if (!follower.isBusy()) {
+                    pathState = 11;
                 }
                 break;
         }
@@ -208,7 +214,13 @@ public class OdometryAuton extends LinearOpMode {
                 break;
             case 9:
                 if (!shooterIntake.isBusy()) {
+                    follower.followPath(paths.BlueLeave);
                     pathState = 10;
+                }
+                break;
+            case 10:
+                if (!follower.isBusy()) {
+                    pathState = 11;
                 }
                 break;
         }
