@@ -17,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 //PedroPathing Constants
 public class Constants {
-    public static FollowerConstants followerConstants = new FollowerConstants().mass(10); //TODO Replace mass with accurate value. Mass is in kilograms
+    public static FollowerConstants followerConstants = new FollowerConstants().mass(15); //TODO Replace mass with accurate value. Mass is in kilograms
 
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
@@ -44,8 +44,8 @@ public class Constants {
             .IMU_HardwareMapName("imu")
             .IMU_Orientation(
                     new RevHubOrientationOnRobot(
-                            RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
-                            RevHubOrientationOnRobot.UsbFacingDirection.RIGHT
+                            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
+                            RevHubOrientationOnRobot.UsbFacingDirection.LEFT
                     )
             );
 
