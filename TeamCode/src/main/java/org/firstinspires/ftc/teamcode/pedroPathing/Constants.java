@@ -22,30 +22,30 @@ public class Constants {
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static MecanumConstants driveConstants = new MecanumConstants()
-            .maxPower(0.25)
+            .maxPower(1)
             .rightFrontMotorName("rightFrontDrive")
             .rightRearMotorName("rightBackDrive")
             .leftRearMotorName("leftBackDrive")
             .leftFrontMotorName("leftFrontDrive")
-            .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
-            .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
-            .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
-            .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD);
+            .leftFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .leftRearMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .rightFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .rightRearMotorDirection(DcMotorSimple.Direction.REVERSE);
 
     public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
             .forwardEncoder_HardwareMapName("leftFrontDrive")
             .strafeEncoder_HardwareMapName("leftBackDrive")
             .forwardPodY(-5.875)
             .strafePodX(7.375)
-            .forwardTicksToInches(0.002968434003)
-            .strafeTicksToInches(0.002968434003) //TODO Replace guessed inches per tick with accurate measurements though math feels very solid
-            .forwardEncoderDirection(Encoder.REVERSE)
-            .strafeEncoderDirection(Encoder.REVERSE)
+            .forwardTicksToInches(0.002976417016479054)
+            .strafeTicksToInches(0.0029601869631298407)
+            .forwardEncoderDirection(Encoder.FORWARD)
+            .strafeEncoderDirection(Encoder.FORWARD)
             .IMU_HardwareMapName("imu")
             .IMU_Orientation(
                     new RevHubOrientationOnRobot(
-                            RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
-                            RevHubOrientationOnRobot.UsbFacingDirection.RIGHT
+                            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
+                            RevHubOrientationOnRobot.UsbFacingDirection.LEFT
                     )
             );
 

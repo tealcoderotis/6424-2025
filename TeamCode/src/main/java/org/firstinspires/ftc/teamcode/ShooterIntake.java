@@ -27,8 +27,8 @@ public class ShooterIntake {
     private Telemetry telemetry;
     public ShooterIntake(HardwareMap hardwareMap) {
         shootTimer = new Timer();
-        indexer = (DcMotor)hardwareMap.get("indexMotor");
-        shooter = (DcMotor)hardwareMap.get("shooterMotor");
+        indexer = (DcMotor)hardwareMap.get("feeder");
+        shooter = (DcMotor)hardwareMap.get("launcher");
         voltageCompensator = new VoltagePowerCompensator(hardwareMap);
         resetEncoders();
     }
@@ -52,7 +52,7 @@ public class ShooterIntake {
         currentBall = 0;
         if (!isReving) {
             shootTimer.resetTimer();
-            shooter.setPower(voltageCompensator.compensate(0.63));
+            shooter.setPower(voltageCompensator.compensate(-0.63));
             isReving = true;
         }
         isShooterBusy = true;
@@ -62,7 +62,7 @@ public class ShooterIntake {
         currentBall = -1;
         isIntaking = false;
         shootTimer.resetTimer();
-        shooter.setPower(voltageCompensator.compensate(0.63));
+        shooter.setPower(voltageCompensator.compensate(-0.63));
         isShooterBusy = true;
         isReving = true;
     }
@@ -72,7 +72,7 @@ public class ShooterIntake {
         isIntakeContinuous = continuous;
         isIntaking = true;
         shootTimer.resetTimer();
-        indexer.setPower(voltageCompensator.compensate(0.4));
+        indexer.setPower(voltageCompensator.compensate(0.5));
         isShooterBusy = true;
     }
 
@@ -91,7 +91,7 @@ public class ShooterIntake {
                 if (isReving) {
                     if (shootTimer.getElapsedTime() >= REV_TIME && currentBall != -1) {
                         isReving = false;
-                        indexer.setPower(voltageCompensator.compensate(0.4));
+                        indexer.setPower(voltageCompensator.compensate(0.5));
                         shootTimer.resetTimer();
                     }
                 }
@@ -102,7 +102,7 @@ public class ShooterIntake {
                     if (shootTimer.getElapsedTime() >= SHOOTING_TIME) {
                         currentBall ++;
                         if (currentBall < ballsToShoot) {
-                            indexer.setPower(voltageCompensator.compensate(0.4));
+                            indexer.setPower(voltageCompensator.compensate(0.5));
                             shootTimer.resetTimer();
                         }
                         else {
