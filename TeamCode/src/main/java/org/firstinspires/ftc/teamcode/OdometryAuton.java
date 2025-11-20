@@ -32,6 +32,7 @@ public class OdometryAuton extends LinearOpMode {
         DcMotor rightBackDrive = (DcMotor)hardwareMap.get("rightBackDrive");
         DcMotor leftFrontDrive = (DcMotor)hardwareMap.get("leftFrontDrive");
         DcMotor leftBackDrive = (DcMotor)hardwareMap.get("leftBackDrive");
+        follower.setMaxPower(0.25);
         while (opModeInInit()) {
             if (gamepad1.bWasPressed()) {
                 //Red starting pose

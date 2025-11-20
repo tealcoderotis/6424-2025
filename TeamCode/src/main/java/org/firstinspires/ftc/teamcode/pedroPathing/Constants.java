@@ -22,7 +22,7 @@ public class Constants {
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static MecanumConstants driveConstants = new MecanumConstants()
-            .maxPower(1)
+            .maxPower(0.25)
             .rightFrontMotorName("rightFrontDrive")
             .rightRearMotorName("rightBackDrive")
             .leftRearMotorName("leftBackDrive")
@@ -39,13 +39,13 @@ public class Constants {
             .strafePodX(7.375)
             .forwardTicksToInches(0.002968434003)
             .strafeTicksToInches(0.002968434003) //TODO Replace guessed inches per tick with accurate measurements though math feels very solid
-            .forwardEncoderDirection(Encoder.FORWARD)
-            .strafeEncoderDirection(Encoder.FORWARD)
+            .forwardEncoderDirection(Encoder.REVERSE)
+            .strafeEncoderDirection(Encoder.REVERSE)
             .IMU_HardwareMapName("imu")
             .IMU_Orientation(
                     new RevHubOrientationOnRobot(
-                            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
-                            RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                            RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
+                            RevHubOrientationOnRobot.UsbFacingDirection.RIGHT
                     )
             );
 
