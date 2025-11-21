@@ -25,6 +25,7 @@ public class OdometryAuton extends LinearOpMode {
         //initialization
         shooterIntake = new ShooterIntake(hardwareMap, telemetry);
         follower = Constants.createFollower(hardwareMap);
+        follower.setMaxPower(1);
         paths = new Paths(follower);
         pathState = 0;
         alliance = -1;
