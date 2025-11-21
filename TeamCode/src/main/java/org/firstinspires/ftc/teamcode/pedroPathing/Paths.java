@@ -8,6 +8,7 @@ import com.pedropathing.paths.PathChain;
 //PedroPathing Paths
 public class Paths {
     //declare all of our paths
+    public PathChain RedStart;
     public PathChain RedRow1IntakeBegin;
     public PathChain RedRow1IntakeEnd;
     public PathChain RedRow1ToShooter;
@@ -15,6 +16,7 @@ public class Paths {
     public PathChain RedRow2IntakeEnd;
     public PathChain RedRow2ToShooter;
     public PathChain RedLeave;
+    public PathChain BlueStart;
     public PathChain BlueRow1IntakeBegin;
     public PathChain BlueRow1IntakeEnd;
     public PathChain BlueRow1ToShooter;
@@ -25,6 +27,14 @@ public class Paths {
 
     //initalize all of our paths
     public Paths(Follower follower) {
+        RedStart = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(110.36335877862595, 134.10687022900763), new Pose(83.392, 132.938))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
         RedRow1IntakeBegin = follower
                 .pathBuilder()
                 .addPath(
@@ -79,6 +89,14 @@ public class Paths {
                         new BezierLine(new Pose(83.392, 132.938), new Pose(103.108, 59.579))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        BlueStart = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(33.85648854961832, 134.10687022900763), new Pose(61.051, 132.133))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
                 .build();
 
         BlueRow1IntakeBegin = follower
