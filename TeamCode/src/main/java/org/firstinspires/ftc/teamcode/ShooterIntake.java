@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.VoltagePowerCompensator;
@@ -11,7 +13,7 @@ import org.firstinspires.ftc.teamcode.util.VoltagePowerCompensator;
 //handle our intake and shooter
 public class ShooterIntake {
     private DcMotor indexer;
-    private DcMotor shooter;
+    private DcMotorEx shooter;
     private Timer shootTimer;
     private boolean isShooterBusy = false;
     private boolean isReving = false;
@@ -23,7 +25,7 @@ public class ShooterIntake {
     private static final int INTAKE_TIME = 500;
     private static final int REV_TIME = 2000;
     private static final int INTAKE_END_TIME = 100;
-    private static final double SHOOTER_POWER = -0.65;
+    private static final double SHOOTER_SPEED = -1510;
     private static final double INDEXER_POWER = 0.65;
     private static final double INDEXER_BACK_POWER = -0.65;
     private int ballsToShoot = 0;
@@ -33,7 +35,7 @@ public class ShooterIntake {
     public ShooterIntake(HardwareMap hardwareMap) {
         shootTimer = new Timer();
         indexer = (DcMotor)hardwareMap.get("feeder");
-        shooter = (DcMotor)hardwareMap.get("launcher");
+        shooter = (DcMotorEx)hardwareMap.get("launcher");
         voltageCompensator = new VoltagePowerCompensator(hardwareMap);
         resetEncoders();
     }
@@ -42,7 +44,8 @@ public class ShooterIntake {
         indexer.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         indexer.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 10));
     }
 
     public ShooterIntake(HardwareMap hardwareMap, Telemetry telemetry) {
@@ -57,7 +60,7 @@ public class ShooterIntake {
         currentBall = 0;
         if (!isReving) {
             shootTimer.resetTimer();
-            shooter.setPower(voltageCompensator.compensate(SHOOTER_POWER));
+            shooter.setVelocity(SHOOTER_SPEED);
             isReving = true;
         }
         isShooterBusy = true;
@@ -67,7 +70,7 @@ public class ShooterIntake {
         currentBall = -1;
         isIntaking = false;
         shootTimer.resetTimer();
-        shooter.setPower(voltageCompensator.compensate(SHOOTER_POWER));
+        shooter.setVelocity(SHOOTER_SPEED);
         isShooterBusy = true;
         isReving = true;
     }
