@@ -13,6 +13,7 @@ public class ShooterIntake {
     private DcMotor indexer;
     private DcMotor shooter;
     private Timer shootTimer;
+    private Timer intakeTimer;
     private boolean isShooterBusy = false;
     private boolean isReving = false;
     private boolean isIntaking = false;
@@ -30,8 +31,10 @@ public class ShooterIntake {
     private int currentBall = -1;
     private VoltagePowerCompensator voltageCompensator;
     private Telemetry telemetry;
+    private boolean hasIndexed = false;
     public ShooterIntake(HardwareMap hardwareMap) {
         shootTimer = new Timer();
+        intakeTimer = new Timer();
         indexer = (DcMotor)hardwareMap.get("feeder");
         shooter = (DcMotor)hardwareMap.get("launcher");
         voltageCompensator = new VoltagePowerCompensator(hardwareMap);
@@ -60,6 +63,7 @@ public class ShooterIntake {
             shooter.setPower(voltageCompensator.compensate(SHOOTER_POWER));
             isReving = true;
         }
+        hasIndexed = false;
         isShooterBusy = true;
     }
 
@@ -85,16 +89,16 @@ public class ShooterIntake {
     //called every loop; checks the elapsed time and moves on to the next ball or stops shooting accordingly
     public void update() {
         if (isShooterBusy) {
+            if (isIntakeMovingBack) {
+                if (intakeTimer.getElapsedTime() >= INTAKE_END_TIME) {
+                    stop();
+                }
+            }
             if (isIntaking) {
                 if (!isIntakeContinuous) {
                     if (shootTimer.getElapsedTime() >= INTAKE_TIME) {
                         indexer.setPower(0);
                         isShooterBusy = false;
-                    }
-                }
-                if (isIntakeMovingBack) {
-                    if (shootTimer.getElapsedTime() >= INTAKE_END_TIME) {
-                        stop();
                     }
                 }
             }
@@ -107,18 +111,18 @@ public class ShooterIntake {
                     }
                 }
                 else {
-                    if (shootTimer.getElapsedTime() >= INDEX_TIME) {
+                    if (shootTimer.getElapsedTime() >= INDEX_TIME && !hasIndexed) {
                         indexer.setPower(0);
-                    }
-                    if (shootTimer.getElapsedTime() >= SHOOTING_TIME) {
                         currentBall ++;
-                        if (currentBall < ballsToShoot) {
-                            indexer.setPower(voltageCompensator.compensate(INDEXER_POWER));
-                            shootTimer.resetTimer();
-                        }
-                        else {
+                        if (currentBall >= ballsToShoot) {
                             stop();
                         }
+                        hasIndexed = true;
+                    }
+                    if (shootTimer.getElapsedTime() >= SHOOTING_TIME) {
+                        indexer.setPower(voltageCompensator.compensate(INDEXER_POWER));
+                        shootTimer.resetTimer();
+                        hasIndexed = false;
                     }
                 }
             }
@@ -136,12 +140,13 @@ public class ShooterIntake {
         isShooterBusy = false;
         isReving = false;
         isIntaking = false;
+        hasIndexed = false;
         currentBall = -1;
     }
 
     public void stopIntaking() {
         indexer.setPower(voltageCompensator.compensate(INDEXER_BACK_POWER));
-        shootTimer.resetTimer();
+        intakeTimer.resetTimer();
         isIntakeMovingBack = true;
     }
 
