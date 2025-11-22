@@ -91,7 +91,13 @@ public class ShooterIntake {
         if (isShooterBusy) {
             if (isIntakeMovingBack) {
                 if (intakeTimer.getElapsedTime() >= INTAKE_END_TIME) {
-                    stop();
+                    if (!isReving) {
+                        stop();
+                    }
+                    else {
+                        isIntaking = false;
+                        indexer.setPower(0);
+                    }
                 }
             }
             if (isIntaking) {

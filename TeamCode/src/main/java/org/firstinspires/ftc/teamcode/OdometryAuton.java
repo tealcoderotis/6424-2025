@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -19,6 +20,8 @@ public class OdometryAuton extends LinearOpMode {
     private Paths paths;
     //-1 unknown; 0 red; 1 blue
     private int alliance;
+    /*private Limelight3A limelight;
+    private static final String LIMELIGHT_HARDWARE_MAP_NAME = "limelight";*/
 
     @Override
     public void runOpMode() {
@@ -33,6 +36,7 @@ public class OdometryAuton extends LinearOpMode {
         DcMotor rightBackDrive = (DcMotor)hardwareMap.get("rightBackDrive");
         DcMotor leftFrontDrive = (DcMotor)hardwareMap.get("leftFrontDrive");
         DcMotor leftBackDrive = (DcMotor)hardwareMap.get("leftBackDrive");
+        //limelight = hardwareMap.get(Limelight3A.class, LIMELIGHT_HARDWARE_MAP_NAME);
         while (opModeInInit()) {
             if (gamepad1.bWasPressed()) {
                 //Red starting pose
