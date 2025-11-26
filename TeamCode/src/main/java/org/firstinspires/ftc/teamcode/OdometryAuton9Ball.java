@@ -3,21 +3,20 @@ package org.firstinspires.ftc.teamcode;
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import org.firstinspires.ftc.teamcode.pedroPathing.Paths;
+import org.firstinspires.ftc.teamcode.pedroPathing.PathsEfficient;
 
 @Configurable
 @Autonomous
 public class OdometryAuton9Ball extends LinearOpMode {
     private Follower follower;
-    private ShooterIntakeRevised shooterIntake;
+    private ShooterIntakeEfficient shooterIntake;
     private int pathState;
-    private Paths paths;
+    private PathsEfficient paths;
     //-1 unknown; 0 red; 1 blue
     private int alliance;
     /*private Limelight3A limelight;
@@ -26,10 +25,10 @@ public class OdometryAuton9Ball extends LinearOpMode {
     @Override
     public void runOpMode() {
         //initialization
-        shooterIntake = new ShooterIntakeRevised(hardwareMap, telemetry);
+        shooterIntake = new ShooterIntakeEfficient(hardwareMap, telemetry);
         follower = Constants.createFollower(hardwareMap);
         follower.setMaxPower(1);
-        paths = new Paths(follower);
+        paths = new PathsEfficient(follower);
         pathState = 0;
         alliance = -1;
         DcMotor rightFrontDrive = (DcMotor) hardwareMap.get("rightFrontDrive");
@@ -109,9 +108,8 @@ public class OdometryAuton9Ball extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    shooterIntake.stop();
                     shooterIntake.beginReving();
-                    //shooterIntake.stopIntaking();
+                    shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
                     follower.followPath(paths.RedRow1ToShooter);
                     pathState = 5;
@@ -139,9 +137,8 @@ public class OdometryAuton9Ball extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    shooterIntake.stop();
                     shooterIntake.beginReving();
-                    //shooterIntake.stopIntaking();
+                    shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
                     follower.followPath(paths.RedRow2ToShooter);
                     pathState = 9;
@@ -198,9 +195,9 @@ public class OdometryAuton9Ball extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
+                    shooterIntake.beginReving();
                     shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
-                    shooterIntake.beginReving();
                     follower.followPath(paths.BlueRow1ToShooter);
                     pathState = 5;
                 }
@@ -227,9 +224,9 @@ public class OdometryAuton9Ball extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
+                    shooterIntake.beginReving();
                     shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
-                    shooterIntake.beginReving();
                     follower.followPath(paths.BlueRow2ToShooter);
                     pathState = 9;
                 }

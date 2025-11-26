@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.VoltagePowerCompensator;
 
-public class ShooterIntakeRevised {
+public class ShooterIntakeEfficient {
     private DcMotor indexer;
     private DcMotorEx shooter;
     private Timer shootTimer;
@@ -19,20 +19,21 @@ public class ShooterIntakeRevised {
     private boolean isIntaking = false;
     private boolean isIntakeContinuous = false;
     private boolean isIntakeMovingBack = false;
-    private static final int SHOOTING_TIME = 2000;
+    private static final int SHOOTING_TIME = 1500;
     private static final int INDEX_TIME = 300;
-    private static final int INTAKE_TIME = 500;
-    private static final int REV_TIME = 2000;
-    private static final int INTAKE_END_TIME = 250;
+    private static final int INTAKE_TIME = 250;
+    private static final int REV_TIME = 1500;
+    private static final int INTAKE_END_TIME = 500;
     private static final double SHOOTER_SPEED = -1510;
     private static final double INDEXER_POWER = 0.65;
-    private static final double INDEXER_BACK_POWER = -0.65;
+    private static final double INDEXER_BACK_POWER = -0.35;
+    private static final double SHOOTER_BACK_POWER = 0.65;
     private int ballsToShoot = 0;
     private int currentBall = -1;
     private VoltagePowerCompensator voltageCompensator;
     private Telemetry telemetry;
     private boolean hasIndexed = false;
-    public ShooterIntakeRevised(HardwareMap hardwareMap) {
+    public ShooterIntakeEfficient(HardwareMap hardwareMap) {
         shootTimer = new Timer();
         intakeTimer = new Timer();
         indexer = (DcMotor)hardwareMap.get("feeder");
@@ -49,7 +50,7 @@ public class ShooterIntakeRevised {
         shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 10));
     }
 
-    public ShooterIntakeRevised(HardwareMap hardwareMap, Telemetry telemetry) {
+    public ShooterIntakeEfficient(HardwareMap hardwareMap, Telemetry telemetry) {
         this(hardwareMap);
         this.telemetry = telemetry;
     }
@@ -69,11 +70,13 @@ public class ShooterIntakeRevised {
     }
 
     public void beginReving() {
-        currentBall = -1;
-        isIntaking = false;
-        shootTimer.resetTimer();
-        shooter.setVelocity(SHOOTER_SPEED);
-        isShooterBusy = true;
+        if (!isIntakeMovingBack) {
+            currentBall = -1;
+            isIntaking = false;
+            shootTimer.resetTimer();
+            shooter.setVelocity(SHOOTER_SPEED);
+            isShooterBusy = true;
+        }
         isReving = true;
     }
 
@@ -93,6 +96,14 @@ public class ShooterIntakeRevised {
             if (isIntakeMovingBack) {
                 if (intakeTimer.getElapsedTime() >= INTAKE_END_TIME) {
                     indexer.setPower(0);
+                    shooter.setPower(0);
+                    isIntakeMovingBack = false;
+                    if (!isReving) {
+                        stop();
+                    }
+                    else {
+                        beginReving();
+                    }
                 }
             }
             if (isIntaking) {
@@ -147,7 +158,9 @@ public class ShooterIntakeRevised {
 
     public void stopIntaking() {
         indexer.setPower(voltageCompensator.compensate(INDEXER_BACK_POWER));
+        shooter.setPower(voltageCompensator.compensate(SHOOTER_BACK_POWER));
         intakeTimer.resetTimer();
+        shootTimer.resetTimer();
         isIntaking = false;
         isIntakeMovingBack = true;
     }
