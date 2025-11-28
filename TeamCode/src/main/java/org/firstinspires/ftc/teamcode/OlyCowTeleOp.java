@@ -157,7 +157,7 @@ public class OlyCowTeleOp extends OpMode {
             telemetry.addData("x", follower.getPose().getX());
             telemetry.addData("y", follower.getPose().getY());
             telemetry.addData("heading", Math.toDegrees(follower.getPose().getHeading()));
-            telemetry.addData("angleToShooter", trackingAngle);
+            telemetry.addData("angleToShooter", Math.toDegrees(trackingAngle));
             follower.update();
         }
         telemetry.addData("Status", "Initialized");

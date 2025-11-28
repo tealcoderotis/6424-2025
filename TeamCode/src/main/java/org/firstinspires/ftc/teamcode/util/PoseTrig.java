@@ -8,8 +8,8 @@ public class PoseTrig {
     }
 
     public static double angleBetweenPoses(Pose pose1, Pose pose2) {
-        double xDistance = Math.abs(pose2.getX() - pose1.getX());
-        double yDistance = Math.abs(pose2.getY() - pose1.getY());
-        return Math.atan(yDistance/xDistance);
+        double xDistance = pose2.getX() - pose1.getX();
+        double yDistance = pose2.getY() - pose1.getY();
+        return Math.atan2(yDistance, xDistance);
     }
 }
