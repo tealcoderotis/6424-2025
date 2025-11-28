@@ -124,14 +124,6 @@ public class PathsEfficient {
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(45))
                 .build();
 
-        RedLeave = follower
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(new Pose(96, 95.8), new Pose(97.108, 59.579))
-                )
-                .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(0))
-                .build();
-
         RedRow3IntakeBegin = follower
                 .pathBuilder()
                 .addPath(
