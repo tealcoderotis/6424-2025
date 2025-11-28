@@ -31,7 +31,7 @@ public class Paths {
     public PathChain BlueRow2ToShooter;
     public PathChain BlueLeave;
 
-    //initalize all of our paths
+    //initialize all of our paths
     public Paths(Follower follower) {
         RedStart = follower
                 .pathBuilder()
