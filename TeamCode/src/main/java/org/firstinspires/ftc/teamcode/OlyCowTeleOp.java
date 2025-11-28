@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.PoseTrig;
 
 @TeleOp(name = "OlyCowTeleOp")
@@ -36,7 +37,7 @@ public class OlyCowTeleOp extends OpMode {
 
     ElapsedTime feederTimer = new ElapsedTime();
 
-    private int alliance = -1;
+    private Alliance alliance = Alliance.UNKNOWN;
 
     private enum LaunchState {
         IDLE,
@@ -92,13 +93,13 @@ public class OlyCowTeleOp extends OpMode {
         if (gamepad1.bWasPressed()) {
             //Red starting pose
             follower.setStartingPose(new Pose(125.200, 70.930, Math.toRadians(0)));
-            alliance = 0;
+            alliance = Alliance.RED;
             telemetry.addLine("Red alliance");
             telemetry.update();
         } else if (gamepad1.xWasPressed()) {
             //Blue starting pose
             follower.setStartingPose(new Pose(46.892, 59.798, Math.toRadians(180)));
-            alliance = 1;
+            alliance = Alliance.BLUE;
             telemetry.addLine("Blue alliance");
             telemetry.update();
         }
@@ -147,11 +148,11 @@ public class OlyCowTeleOp extends OpMode {
 
         telemetry.addData("State", launchState);
         telemetry.addData("motorSpeed", launcher.getVelocity());
-        if (alliance != -1) {
-            if (alliance == 0) {
+        if (alliance != Alliance.UNKNOWN) {
+            if (alliance == Alliance.RED) {
                 trackingAngle = PoseTrig.angleBetweenPoses(follower.getPose(), new Pose(144,144));
             }
-            else if (alliance == 1) {
+            else if (alliance == Alliance.BLUE) {
                 trackingAngle = PoseTrig.angleBetweenPoses(follower.getPose(), new Pose(0,144));
             }
             telemetry.addData("x", follower.getPose().getX());
