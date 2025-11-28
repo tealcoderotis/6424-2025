@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.util.PoseTrig;
 
 @TeleOp(name = "OlyCowTeleOp")
 //@Disabled
@@ -50,6 +51,7 @@ public class OlyCowTeleOp extends OpMode {
     double rightFrontPower;
     double leftBackPower;
     double rightBackPower;
+    double trackingAngle;
 
     @Override
     public void init() {
@@ -146,9 +148,16 @@ public class OlyCowTeleOp extends OpMode {
         telemetry.addData("State", launchState);
         telemetry.addData("motorSpeed", launcher.getVelocity());
         if (alliance != -1) {
+            if (alliance == 0) {
+                trackingAngle = PoseTrig.angleBetweenPoses(follower.getPose(), new Pose(144,144));
+            }
+            else if (alliance == 1) {
+                trackingAngle = PoseTrig.angleBetweenPoses(follower.getPose(), new Pose(0,144));
+            }
             telemetry.addData("x", follower.getPose().getX());
             telemetry.addData("y", follower.getPose().getY());
             telemetry.addData("heading", Math.toDegrees(follower.getPose().getHeading()));
+            telemetry.addData("angleToShooter", trackingAngle);
             follower.update();
         }
         telemetry.addData("Status", "Initialized");
