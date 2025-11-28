@@ -11,11 +11,18 @@ public class PathsEfficient {
     public PathChain RedStart;
     public PathChain RedRow1IntakeBegin;
     public PathChain RedRow1IntakeEnd;
+    public PathChain RedRow1ToGate1;
+    public PathChain RedRow1ToGate2;
+    public PathChain RedGateToShooter;
+    public PathChain RedRow1ToGate;
     public PathChain RedRow1ToShooter;
     public PathChain RedRow2IntakeBegin;
     public PathChain RedRow2IntakeEnd;
     public PathChain RedRow2ToShooter;
     public PathChain RedLeave;
+    public PathChain RedRow3IntakeBegin;
+    public PathChain RedRow3IntakeEnd;
+    public PathChain RedRow3ToShooter;
     public PathChain BlueStart;
     public PathChain BlueRow1IntakeBegin;
     public PathChain BlueRow1IntakeEnd;
@@ -49,6 +56,40 @@ public class PathsEfficient {
                         new BezierLine(new Pose(97.108, 83.762), new Pose(125.200, 83.762))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        RedRow1ToGate1 = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(125.200, 83.762), new Pose(125.200, 70.930))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        RedRow1ToGate2 = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(125.200, 70.930), new Pose(129.353, 70.930))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        RedRow1ToGate = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(125.200, 83.762)/*, new Pose(123.100, 70.300)*/, new Pose(129.353, 70.930))
+                        //Find out how to add a control point, Coming at the gate diagonally like this could cause a problem with rubber band intakes.
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+
+        RedGateToShooter = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(129.353, 70.930), new Pose(83.392, 132.938))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(45))
                 .build();
 
         RedRow1ToShooter = follower
@@ -90,6 +131,34 @@ public class PathsEfficient {
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(0))
                 .build();
+
+        RedRow3IntakeBegin = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(83.392, 132.938), new Pose(97.108, 35.383))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(0))
+                .build();
+
+        RedRow3IntakeEnd = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(97.108, 35.383), new Pose(125.200, 35.383))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        RedRow3ToShooter = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(125.200, 35.383), new Pose(83.392, 132.938))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(45))
+                .build();
+
+        //RedLeave Should still be called after this
+
+        // New set of paths
 
         BlueStart = follower
                 .pathBuilder()
