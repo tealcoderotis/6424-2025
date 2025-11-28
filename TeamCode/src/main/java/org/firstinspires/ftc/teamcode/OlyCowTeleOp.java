@@ -35,6 +35,8 @@ public class OlyCowTeleOp extends OpMode {
 
     ElapsedTime feederTimer = new ElapsedTime();
 
+    private int alliance = -1;
+
     private enum LaunchState {
         IDLE,
         SPIN_UP,
@@ -79,13 +81,25 @@ public class OlyCowTeleOp extends OpMode {
         launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 10));
 
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(new Pose(125.200, 70.930, Math.toRadians(0)));
 
         telemetry.addData("Status", "Initialized");
     }
 
     @Override
     public void init_loop() {
+        if (gamepad1.bWasPressed()) {
+            //Red starting pose
+            follower.setStartingPose(new Pose(125.200, 70.930, Math.toRadians(0)));
+            alliance = 0;
+            telemetry.addLine("Red alliance");
+            telemetry.update();
+        } else if (gamepad1.xWasPressed()) {
+            //Blue starting pose
+            follower.setStartingPose(new Pose(46.892, 59.798, Math.toRadians(180)));
+            alliance = 1;
+            telemetry.addLine("Blue alliance");
+            telemetry.update();
+        }
     }
 
     @Override
@@ -131,11 +145,13 @@ public class OlyCowTeleOp extends OpMode {
 
         telemetry.addData("State", launchState);
         telemetry.addData("motorSpeed", launcher.getVelocity());
-        telemetry.addData("x", follower.getPose().getX());
-        telemetry.addData("y", follower.getPose().getY());
-        telemetry.addData("heading", Math.toDegrees(follower.getPose().getHeading()));
+        if (alliance != -1) {
+            telemetry.addData("x", follower.getPose().getX());
+            telemetry.addData("y", follower.getPose().getY());
+            telemetry.addData("heading", Math.toDegrees(follower.getPose().getHeading()));
+            follower.update();
+        }
         telemetry.addData("Status", "Initialized");
-        follower.update();
     }
 
     @Override
