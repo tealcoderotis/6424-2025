@@ -248,55 +248,102 @@ public class OdometryAuton12Ball extends LinearOpMode {
                 if (!follower.isBusy()) {
                     shooterIntake.beginReving();
                     shooterIntake.stopIntaking();
-                    follower.setMaxPower(1);
-                    follower.followPath(paths.BlueRow1ToShooter);
+                    follower.setMaxPower(0.75);
+                    follower.followPath(paths.BlueRow1ToGate1);
                     pathState = 5;
                 }
                 break;
             case 5:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginShooting(3);
+
+                    follower.setMaxPower(1);
+                    follower.followPath(paths.BlueRow1ToGate2);
                     pathState = 6;
                 }
                 break;
             case 6:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueRow2IntakeBegin);
-                    pathState = 7;
+                if (!follower.isBusy()) {
+                    gateTimer.resetTimer();
+                    if (gateTimer.getElapsedTime() >= GATE_TIME) {
+                        follower.setMaxPower(1);
+                        follower.followPath(paths.BlueGateToShooter);
+                        pathState = 7;
+                    }
                 }
                 break;
             case 7:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginIntaking(true);
-                    follower.setMaxPower(0.25);
-                    follower.followPath(paths.BlueRow2IntakeEnd);
+                    shooterIntake.beginShooting(3);
                     pathState = 8;
                 }
                 break;
             case 8:
-                if (!follower.isBusy()) {
-                    shooterIntake.beginReving();
-                    shooterIntake.stopIntaking();
-                    follower.setMaxPower(1);
-                    follower.followPath(paths.BlueRow2ToShooter);
+                if (!shooterIntake.isBusy()) {
+                    follower.followPath(paths.BlueRow2IntakeBegin);
                     pathState = 9;
                 }
                 break;
             case 9:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginShooting(3);
+                    shooterIntake.beginIntaking(true);
+                    follower.setMaxPower(0.25);
+                    follower.followPath(paths.BlueRow2IntakeEnd);
                     pathState = 10;
                 }
                 break;
             case 10:
-                if (!shooterIntake.isBusy()) {
-                    follower.followPath(paths.BlueLeave);
+                if (!follower.isBusy()) {
+                    shooterIntake.beginReving();
+                    shooterIntake.stopIntaking();
+                    follower.setMaxPower(1);
+                    follower.followPath(paths.BlueRow2ToShooter);
                     pathState = 11;
                 }
                 break;
             case 11:
                 if (!follower.isBusy()) {
+                    shooterIntake.beginShooting(3);
                     pathState = 12;
+                }
+                break;
+            case 12:
+                if (!shooterIntake.isBusy()) {
+                    follower.followPath(paths.BlueRow3IntakeBegin);
+                    pathState = 13;
+                }
+                break;
+            case 13:
+                if (!follower.isBusy()) {
+                    shooterIntake.beginIntaking(true);
+                    follower.setMaxPower(0.25);
+                    follower.followPath(paths.BlueRow3IntakeEnd);
+                    pathState = 14;
+                }
+                break;
+            case 14:
+                if (!follower.isBusy()) {
+                    shooterIntake.beginReving();
+                    shooterIntake.stopIntaking();
+                    follower.setMaxPower(1);
+                    follower.followPath(paths.BlueRow3ToShooter);
+                    pathState = 15;
+                }
+                break;
+            case 15:
+                if (!follower.isBusy()) {
+                    shooterIntake.beginShooting(3);
+                    pathState = 16;
+                }
+                break;
+            case 16:
+                if (!shooterIntake.isBusy()) {
+                    follower.followPath(paths.BlueLeave);
+                    pathState = 17;
+                }
+                break;
+            case 17:
+                if (!follower.isBusy()) {
+                    pathState = 18;
                 }
                 break;
         }
