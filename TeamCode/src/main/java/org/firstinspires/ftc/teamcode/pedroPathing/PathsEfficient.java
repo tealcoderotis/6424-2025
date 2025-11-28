@@ -156,9 +156,13 @@ public class PathsEfficient {
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(45))
                 .build();
 
-        //RedLeave Should still be called after this
-
-        // New set of paths
+        RedLeave = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(83.392, 132.938), new Pose(125.200, 70.930))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(0))
+                .build();
 
         BlueStart = follower
                 .pathBuilder()

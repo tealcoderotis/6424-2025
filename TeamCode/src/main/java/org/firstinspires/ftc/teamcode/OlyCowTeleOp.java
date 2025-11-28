@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
+import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -8,6 +11,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @TeleOp(name = "OlyCowTeleOp")
 //@Disabled
@@ -26,6 +31,7 @@ public class OlyCowTeleOp extends OpMode {
     private DcMotor rightBackDrive = null;
     private DcMotorEx launcher = null;
     private DcMotorEx feeder = null;
+    private Follower follower;
 
     ElapsedTime feederTimer = new ElapsedTime();
 
@@ -71,6 +77,9 @@ public class OlyCowTeleOp extends OpMode {
         feeder.setPower(STOP_SPEED);
 
         launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 10));
+
+        follower = Constants.createFollower(hardwareMap);
+        follower.setStartingPose(new Pose(125.200, 70.930, Math.toRadians(0)));
 
         telemetry.addData("Status", "Initialized");
     }
@@ -122,7 +131,11 @@ public class OlyCowTeleOp extends OpMode {
 
         telemetry.addData("State", launchState);
         telemetry.addData("motorSpeed", launcher.getVelocity());
-
+        telemetry.addData("x", follower.getPose().getX());
+        telemetry.addData("y", follower.getPose().getY());
+        telemetry.addData("heading", Math.toDegrees(follower.getPose().getHeading()));
+        telemetry.addData("Status", "Initialized");
+        follower.update();
     }
 
     @Override
