@@ -3,7 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ftc.InvertedFTCCoordinates;
+import com.pedropathing.ftc.PoseConverter;
 import com.pedropathing.geometry.Pose;
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.LLResultTypes;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -14,7 +19,10 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.util.Alliance;
+import org.firstinspires.ftc.teamcode.util.PoseDimensionConverter;
 import org.firstinspires.ftc.teamcode.util.PoseTrig;
+
+import java.util.List;
 
 @TeleOp(name = "OlyCowTeleOp")
 //@Disabled
@@ -33,6 +41,7 @@ public class OlyCowTeleOp extends OpMode {
     private DcMotor rightBackDrive = null;
     private DcMotorEx launcher = null;
     private DcMotorEx feeder = null;
+    private Limelight3A limelight;
     private Follower follower;
 
     ElapsedTime feederTimer = new ElapsedTime();
@@ -84,6 +93,8 @@ public class OlyCowTeleOp extends OpMode {
         launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 10));
 
         follower = Constants.createFollower(hardwareMap);
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight.pipelineSwitch(0);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -107,6 +118,7 @@ public class OlyCowTeleOp extends OpMode {
 
     @Override
     public void start() {
+        limelight.start();
     }
 
     @Override
@@ -146,8 +158,27 @@ public class OlyCowTeleOp extends OpMode {
 
         launch(gamepad2.rightBumperWasPressed());
 
+        LLResult limelightResult = limelight.getLatestResult();
+
         telemetry.addData("State", launchState);
         telemetry.addData("motorSpeed", launcher.getVelocity());
+        if (limelightResult != null && limelightResult.isValid()) {
+            List<LLResultTypes.FiducialResult> aprilTags = limelightResult.getFiducialResults();
+            if (!aprilTags.isEmpty()) {
+                LLResultTypes.FiducialResult aprilTag = aprilTags.get(0);
+                telemetry.addData("Tag id", aprilTag.getFiducialId());
+                Pose robotPose = PoseConverter.pose2DToPose(PoseDimensionConverter.pose3DToPose2D(aprilTag.getRobotPoseFieldSpace()), InvertedFTCCoordinates.INSTANCE);
+                telemetry.addData("Limelight x", robotPose.getX());
+                telemetry.addData("Limelight y", robotPose.getY());
+                telemetry.addData("Limelight heading", Math.toDegrees(robotPose.getHeading()));
+            }
+            else {
+                telemetry.addData("Limelight result", "Invalid");
+            }
+        }
+        else {
+            telemetry.addData("Limelight result", "Invalid");
+        }
         if (alliance != Alliance.UNKNOWN) {
             if (alliance == Alliance.RED) {
                 trackingAngle = PoseTrig.angleBetweenPoses(follower.getPose(), new Pose(144,144));
