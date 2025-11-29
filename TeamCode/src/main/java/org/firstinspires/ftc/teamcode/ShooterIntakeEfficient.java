@@ -24,12 +24,13 @@ public class ShooterIntakeEfficient {
     private static final int INTAKE_TIME = 250;
     private static final int REV_TIME = 1500;
     private static final int INTAKE_END_TIME = 500;
-    private static final double SHOOTER_SPEED = -1510;
+    private static final double SHOOTER_SPEED = 1200;
     private static final double INDEXER_POWER = 0.65;
     private static final double INDEXER_BACK_POWER = -0.35;
     private static final double SHOOTER_BACK_POWER = 0.65;
     private int ballsToShoot = 0;
     private int currentBall = -1;
+    private double shooterSpeed = 0;
     private VoltagePowerCompensator voltageCompensator;
     private Telemetry telemetry;
     private boolean hasIndexed = false;
@@ -56,28 +57,37 @@ public class ShooterIntakeEfficient {
     }
 
     //only called once when we start shooting
-    public void beginShooting(int ballsToShoot) {
+    public void beginShooting(int ballsToShoot, double shooterSpeed) {
         isIntaking = false;
         this.ballsToShoot = ballsToShoot;
         currentBall = 0;
         if (!isReving) {
             shootTimer.resetTimer();
-            shooter.setVelocity(SHOOTER_SPEED);
+            shooter.setVelocity(-shooterSpeed);;
             isReving = true;
         }
         hasIndexed = false;
         isShooterBusy = true;
     }
 
-    public void beginReving() {
+    public void beginShooting(int ballsToShoot) {
+        beginShooting(ballsToShoot, SHOOTER_SPEED);
+    }
+
+    public void beginReving(double shooterSpeed) {
         if (!isIntakeMovingBack) {
             currentBall = -1;
             isIntaking = false;
             shootTimer.resetTimer();
-            shooter.setVelocity(SHOOTER_SPEED);
+            shooter.setVelocity(-shooterSpeed);
             isShooterBusy = true;
         }
+        this.shooterSpeed = shooterSpeed;
         isReving = true;
+    }
+
+    public void beginReving() {
+        beginReving(SHOOTER_SPEED);
     }
 
     //only called once when we start intaking
@@ -102,7 +112,7 @@ public class ShooterIntakeEfficient {
                         stop();
                     }
                     else {
-                        beginReving();
+                        beginReving(this.shooterSpeed);
                     }
                 }
             }
@@ -116,7 +126,7 @@ public class ShooterIntakeEfficient {
             }
             else {
                 if (isReving) {
-                    if (shootTimer.getElapsedTime() >= REV_TIME && currentBall != -1) {
+                    if (shooter.getVelocity() <= -shooterSpeed && currentBall != -1) {
                         isReving = false;
                         indexer.setPower(voltageCompensator.compensate(INDEXER_POWER));
                         shootTimer.resetTimer();
@@ -154,6 +164,7 @@ public class ShooterIntakeEfficient {
         isIntaking = false;
         hasIndexed = false;
         currentBall = -1;
+        shooterSpeed = 0;
     }
 
     public void stopIntaking() {

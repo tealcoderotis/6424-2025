@@ -6,6 +6,8 @@ import com.pedropathing.ftc.FollowerBuilder;
 import com.pedropathing.ftc.drivetrains.MecanumConstants;
 import com.pedropathing.ftc.localization.Encoder;
 import com.pedropathing.ftc.localization.constants.PinpointConstants;
+import com.pedropathing.ftc.localization.constants.ThreeWheelConstants;
+import com.pedropathing.ftc.localization.constants.ThreeWheelIMUConstants;
 import com.pedropathing.ftc.localization.constants.TwoWheelConstants;
 import com.pedropathing.paths.PathConstraints;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
@@ -51,9 +53,31 @@ public class Constants {
                     )
             );
 
+    public static ThreeWheelIMUConstants threeWheelLocalizerConstants = new ThreeWheelIMUConstants()
+            .leftEncoder_HardwareMapName("")
+            .rightEncoder_HardwareMapName("rightFrontDrive")
+            .strafeEncoder_HardwareMapName("")
+            .leftPodY(-5.875)
+            .rightPodY(-7.375)
+            .strafePodX(-5.875)
+            .forwardTicksToInches(0.002976417016479054)
+            .strafeTicksToInches(0.002976417016479054)
+            .turnTicksToInches(0.0029601869631298407)
+            .leftEncoderDirection(Encoder.FORWARD)
+            .rightEncoderDirection(Encoder.FORWARD)
+            .strafeEncoderDirection(Encoder.FORWARD)
+            .IMU_HardwareMapName("imu")
+            .IMU_Orientation(
+                    new RevHubOrientationOnRobot(
+                            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
+                            RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                    )
+            );
+
+
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
-                .twoWheelLocalizer(localizerConstants)
+                .threeWheelIMULocalizer(threeWheelLocalizerConstants)
                 .pathConstraints(pathConstraints)
                 .mecanumDrivetrain(driveConstants)
                 .build();

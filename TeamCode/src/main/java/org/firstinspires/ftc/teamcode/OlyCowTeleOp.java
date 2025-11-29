@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.util.PoseTrig;
 
 import java.util.List;
 
-@TeleOp(name = "OlyCowTeleOp")
+@TeleOp(name = "OlyCowTeleOp (Android Studio Version)")
 //@Disabled
 public class OlyCowTeleOp extends OpMode {
     final double FEED_TIME_SECONDS = 0.5;
@@ -32,8 +32,9 @@ public class OlyCowTeleOp extends OpMode {
     final double HALF_SPEED = 0.5;
     final double FULL_SPEED = 1.0;
 
-    final double LAUNCHER_MAX_VELOCITY = 2000;
-    final double LAUNCHER_MIN_VELOCITY = 1450;
+    final double LAUNCHER_MAX_VELOCITY = 1575;
+    final double LAUNCHER_MIN_VELOCITY = 1200;
+    final double MINIMUM_ADJUSTMENT = 0.05;
 
     private DcMotor leftFrontDrive = null;
     private DcMotor rightFrontDrive = null;
@@ -160,6 +161,22 @@ public class OlyCowTeleOp extends OpMode {
 
         LLResult limelightResult = limelight.getLatestResult();
 
+        if (gamepad1.a) {
+            if (limelightResult != null && limelightResult.isValid()) {
+                double error = -limelightResult.getTx();
+                if (Math.abs(error) >= 1.0) {
+                    double steeringAdjust;
+                    if (error < 0) {
+                        steeringAdjust = -0.1 * error + MINIMUM_ADJUSTMENT;
+                    }
+                    else {
+                        steeringAdjust = -0.1 * error - MINIMUM_ADJUSTMENT;
+                    }
+                    mecanumDrive(0, 0, steeringAdjust);
+                }
+            }
+        }
+
         telemetry.addData("State", launchState);
         telemetry.addData("motorSpeed", launcher.getVelocity());
         if (limelightResult != null && limelightResult.isValid()) {
@@ -167,14 +184,13 @@ public class OlyCowTeleOp extends OpMode {
             if (!aprilTags.isEmpty()) {
                 LLResultTypes.FiducialResult aprilTag = aprilTags.get(0);
                 telemetry.addData("Tag id", aprilTag.getFiducialId());
-                Pose robotPose = PoseConverter.pose2DToPose(PoseDimensionConverter.pose3DToPose2D(aprilTag.getRobotPoseFieldSpace()), InvertedFTCCoordinates.INSTANCE);
-                telemetry.addData("Limelight x", robotPose.getX());
-                telemetry.addData("Limelight y", robotPose.getY());
-                telemetry.addData("Limelight heading", Math.toDegrees(robotPose.getHeading()));
             }
             else {
-                telemetry.addData("Limelight result", "Invalid");
+                telemetry.addData("Tag id", "No tag");
             }
+            telemetry.addData("tx", limelightResult.getTx());
+            telemetry.addData("ty", limelightResult.getTy());
+            telemetry.addData("ta", limelightResult.getTa());
         }
         else {
             telemetry.addData("Limelight result", "Invalid");

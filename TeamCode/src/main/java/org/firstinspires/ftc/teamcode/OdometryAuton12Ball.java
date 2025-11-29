@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.pedroPathing.PathsEfficient;
 
 @Configurable
-@Autonomous
+@Autonomous(name = "Odometry 12 Ball Auton")
 public class OdometryAuton12Ball extends LinearOpMode {
     private Follower follower;
     private ShooterIntakeEfficient shooterIntake;

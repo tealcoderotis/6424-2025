@@ -23,6 +23,15 @@ public class PathsEfficient {
     public PathChain RedRow3IntakeEnd;
     public PathChain RedRow3ToShooter;
     public PathChain RedLeave;
+    public PathChain RedLeave12Ball;
+    public PathChain RedFarStart;
+    public PathChain RedFarRow1IntakeBegin;
+    public PathChain RedFarRow1IntakeEnd;
+    public PathChain RedFarRow1ToShooter;
+    public PathChain RedFarRow2IntakeBegin;
+    public PathChain RedFarRow2IntakeEnd;
+    public PathChain RedFarRow2ToShooter;
+    public PathChain RedFarLeave;
     public PathChain BlueStart;
     public PathChain BlueRow1IntakeBegin;
     public PathChain BlueRow1IntakeEnd;
@@ -38,6 +47,15 @@ public class PathsEfficient {
     public PathChain BlueRow3IntakeEnd;
     public PathChain BlueRow3ToShooter;
     public PathChain BlueLeave;
+    public PathChain BlueFarStart;
+    public PathChain BlueFarRow1IntakeBegin;
+    public PathChain BlueFarRow1IntakeEnd;
+    public PathChain BlueFarRow1ToShooter;
+    public PathChain BlueFarRow2IntakeBegin;
+    public PathChain BlueFarRow2IntakeEnd;
+    public PathChain BlueFarRow2ToShooter;
+    public PathChain BlueFarLeave;
+    public PathChain BlueLeave12Ball;
 
     //initalize all of our paths
     public PathsEfficient(Follower follower) {
@@ -158,9 +176,81 @@ public class PathsEfficient {
         RedLeave = follower
                 .pathBuilder()
                 .addPath(
+                        new BezierLine(new Pose(96, 95.8), new Pose(97.108, 59.579))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(0))
+                .build();
+
+        RedLeave12Ball = follower
+                .pathBuilder()
+                .addPath(
                         new BezierLine(new Pose(96, 95.8), new Pose(125.200, 70.930))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(45), Math.toRadians(0))
+                .build();
+
+        RedFarStart = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(84.000, 12.000), new Pose(84.000, 12.000))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(65))
+                .build();
+
+        RedFarRow1IntakeBegin = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(84.000, 12.000), new Pose(97.108, 35.383))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(65), Math.toRadians(0))
+                .build();
+
+        RedFarRow1IntakeEnd = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(97.108, 35.383), new Pose(125.200, 35.383))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        RedFarRow1ToShooter = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(125.200, 35.383), new Pose(84.000, 12.000))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(65))
+                .build();
+
+        RedFarRow2IntakeBegin = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(84.000, 12.000), new Pose(97.108, 59.579))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(65), Math.toRadians(0))
+                .build();
+
+        RedFarRow2IntakeEnd = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(97.108, 59.579), new Pose(125.200, 59.579))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .build();
+
+        RedFarRow2ToShooter = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(125.200, 59.579), new Pose(84.000, 12.000))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(65))
+                .build();
+
+        RedFarLeave = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(84.000, 12.000), new Pose(97.108, 59.579))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(65), Math.toRadians(0))
                 .build();
 
         BlueStart = follower
@@ -212,7 +302,6 @@ public class PathsEfficient {
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
-
 
         BlueGateToShooter = follower
                 .pathBuilder()
@@ -278,13 +367,84 @@ public class PathsEfficient {
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(45))
                 .build();
 
-
         BlueLeave = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(48, 95.8), new Pose(46.892, 59.798))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(180))
+                .build();
+
+        BlueLeave12Ball = follower
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(48, 95.8), new Pose(18.8, 70.930))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(180))
+                .build();
+
+        BlueFarStart = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(60.000, 12.000), new Pose(60.000, 12.000))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(115))
+                .build();
+
+        BlueFarRow1IntakeBegin = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(60.000, 12.000), new Pose(46.892, 35.383))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(115), Math.toRadians(180))
+                .build();
+
+        BlueFarRow1IntakeEnd = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(46.892, 35.383), new Pose(18.800, 35.383))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
+                .build();
+
+        BlueFarRow1ToShooter = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(18.800, 35.383), new Pose(60.000, 12.000))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(115))
+                .build();
+
+        BlueFarRow2IntakeBegin = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(60.000, 12.000), new Pose(46.892, 59.798))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(115), Math.toRadians(180))
+                .build();
+
+        BlueFarRow2IntakeEnd = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(46.892, 59.798), new Pose(18.800, 59.798))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
+                .build();
+
+        BlueFarRow2ToShooter = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(18.800, 59.798), new Pose(60.000, 12.000))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(115))
+                .build();
+
+        BlueFarLeave = follower
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(60.000, 12.000), new Pose(46.892, 59.798))
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(115), Math.toRadians(180))
                 .build();
     }
 }
