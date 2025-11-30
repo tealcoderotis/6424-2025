@@ -24,7 +24,7 @@ public class ShooterIntakeEfficient {
     private static final int INTAKE_TIME = 250;
     private static final int REV_TIME = 1500;
     private static final int INTAKE_END_TIME = 500;
-    private static final double SHOOTER_SPEED = 1200;
+    private static final double SHOOTER_SPEED = 1575;
     private static final double INDEXER_POWER = 0.65;
     private static final double INDEXER_BACK_POWER = -0.35;
     private static final double SHOOTER_BACK_POWER = 0.65;
@@ -126,7 +126,7 @@ public class ShooterIntakeEfficient {
             }
             else {
                 if (isReving) {
-                    if (shooter.getVelocity() <= -shooterSpeed && currentBall != -1) {
+                    if (shootTimer.getElapsedTime() >= REV_TIME && currentBall != -1) {
                         isReving = false;
                         indexer.setPower(voltageCompensator.compensate(INDEXER_POWER));
                         shootTimer.resetTimer();

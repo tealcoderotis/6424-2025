@@ -192,9 +192,9 @@ public class PathsEfficient {
         RedFarStart = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(84.000, 12.000), new Pose(84.000, 12.000))
+                        new BezierLine(new Pose(84.000, 9.7), new Pose(84.000, 12.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(65))
+                .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(67.5))
                 .build();
 
         RedFarRow1IntakeBegin = follower
@@ -202,7 +202,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(84.000, 12.000), new Pose(97.108, 35.383))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(65), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(67.5), Math.toRadians(0))
                 .build();
 
         RedFarRow1IntakeEnd = follower
@@ -218,7 +218,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(125.200, 35.383), new Pose(84.000, 12.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(65))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(67.5))
                 .build();
 
         RedFarRow2IntakeBegin = follower
@@ -226,7 +226,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(84.000, 12.000), new Pose(97.108, 59.579))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(65), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(67.5), Math.toRadians(0))
                 .build();
 
         RedFarRow2IntakeEnd = follower
@@ -242,7 +242,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(125.200, 59.579), new Pose(84.000, 12.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(65))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(67.5))
                 .build();
 
         RedFarLeave = follower
@@ -250,7 +250,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(84.000, 12.000), new Pose(97.108, 59.579))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(65), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(67.5), Math.toRadians(0))
                 .build();
 
         BlueStart = follower
@@ -386,9 +386,9 @@ public class PathsEfficient {
         BlueFarStart = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(60.000, 12.000), new Pose(60.000, 12.000))
+                        new BezierLine(new Pose(60.000, 9.7), new Pose(60.000, 12.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(115))
+                .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(112.5))
                 .build();
 
         BlueFarRow1IntakeBegin = follower
@@ -396,7 +396,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(60.000, 12.000), new Pose(46.892, 35.383))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(115), Math.toRadians(180))
+                .setLinearHeadingInterpolation(Math.toRadians(112.5), Math.toRadians(180))
                 .build();
 
         BlueFarRow1IntakeEnd = follower
@@ -412,7 +412,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(18.800, 35.383), new Pose(60.000, 12.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(115))
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(112.5))
                 .build();
 
         BlueFarRow2IntakeBegin = follower
@@ -420,7 +420,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(60.000, 12.000), new Pose(46.892, 59.798))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(115), Math.toRadians(180))
+                .setLinearHeadingInterpolation(Math.toRadians(112.5), Math.toRadians(180))
                 .build();
 
         BlueFarRow2IntakeEnd = follower
@@ -436,7 +436,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(18.800, 59.798), new Pose(60.000, 12.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(115))
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(112.5))
                 .build();
 
         BlueFarLeave = follower
@@ -444,7 +444,7 @@ public class PathsEfficient {
                 .addPath(
                         new BezierLine(new Pose(60.000, 12.000), new Pose(46.892, 59.798))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(115), Math.toRadians(180))
+                .setLinearHeadingInterpolation(Math.toRadians(112.5), Math.toRadians(180))
                 .build();
     }
 }

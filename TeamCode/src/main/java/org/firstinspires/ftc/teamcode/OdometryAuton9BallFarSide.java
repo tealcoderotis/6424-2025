@@ -39,13 +39,13 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
         while (opModeInInit()) {
             if (gamepad1.bWasPressed()) {
                 //Red starting pose
-                follower.setStartingPose(new Pose(84.000, 12.000, Math.toRadians(0)));
+                follower.setStartingPose(new Pose(84.000, 9.7, Math.toRadians(90)));
                 alliance = 0;
                 telemetry.addLine("Red alliance");
                 telemetry.update();
             } else if (gamepad1.xWasPressed()) {
                 //Blue starting pose
-                follower.setStartingPose(new Pose(60.000, 12.000, Math.toRadians(180)));
+                follower.setStartingPose(new Pose(60.000, 9.7, Math.toRadians(90)));
                 alliance = 1;
                 telemetry.addLine("Blue alliance");
                 telemetry.update();
@@ -82,7 +82,7 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
     public void autonomousRedPathUpdate() {
         switch (pathState) {
             case 0:
-                shooterIntake.beginReving(1575);
+                shooterIntake.beginReving(2100);
                 follower.followPath(paths.RedFarStart);
                 pathState = 1;
                 break;
@@ -108,7 +108,7 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginReving(1575);
+                    shooterIntake.beginReving(2100);
                     shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
                     follower.followPath(paths.RedFarRow1ToShooter);
@@ -137,7 +137,7 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginReving(1575);
+                    shooterIntake.beginReving(2100);
                     shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
                     follower.followPath(paths.RedFarRow2ToShooter);
@@ -169,7 +169,7 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
     public void autonomousBluePathUpdate() {
         switch (pathState) {
             case 0:
-                shooterIntake.beginReving(1575);
+                shooterIntake.beginReving(2100);
                 follower.followPath(paths.BlueFarStart);
                 pathState = 1;
                 break;
@@ -195,7 +195,7 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginReving(1575);
+                    shooterIntake.beginReving(2100);
                     shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
                     follower.followPath(paths.BlueFarRow1ToShooter);
@@ -224,7 +224,7 @@ public class OdometryAuton9BallFarSide extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    shooterIntake.beginReving(1575);
+                    shooterIntake.beginReving(2100);
                     shooterIntake.stopIntaking();
                     follower.setMaxPower(1);
                     follower.followPath(paths.BlueFarRow2ToShooter);

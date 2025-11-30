@@ -33,7 +33,7 @@ public class OlyCowTeleOp extends OpMode {
     final double FULL_SPEED = 1.0;
 
     final double LAUNCHER_MAX_VELOCITY = 1575;
-    final double LAUNCHER_MIN_VELOCITY = 1200;
+    final double LAUNCHER_MIN_VELOCITY = 1000;
     final double MINIMUM_ADJUSTMENT = 0.05;
 
     private DcMotor leftFrontDrive = null;
